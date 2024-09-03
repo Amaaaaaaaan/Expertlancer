@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f4f8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Header -->
+    <header class="bg-white shadow-md py-4 px-6">
+        <div class="container mx-auto flex items-center justify-between flex-wrap">
+            <!-- Logo -->
+            <a class="text-2xl font-bold text-blue-600 whitespace-nowrap" href="/">ExpertLancer</a>
+          
+            <!-- Desktop Menu -->
+            <nav class="md:flex md:items-center md:justify-center md:gap-4 flex-grow">
+                <input type="text" id="search-title" placeholder="Search by: Job title, Keyword..." class="border rounded px-4 py-2 w-full max-w-xs">
+                <input type="text" id="search-location" placeholder="City" class="border rounded px-4 py-2 w-full max-w-xs">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" id="search-button">Find Job</button>
+                <!-- Filter Dropdown -->
+                <div class="relative inline-block text-left">
+                    <button id="filter-button" class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 flex items-center gap-2">
+                        Filters
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="filter-menu" class="absolute z-50 right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg hidden">
+                        <div class="p-4">
+                            <button id="filter-full-time" class="w-full text-left py-2 px-4 rounded hover:bg-blue-100" data-filter="Full-Time">Full-time</button>
+                            <button id="filter-part-time" class="w-full text-left py-2 px-4 rounded hover:bg-blue-100" data-filter="Part-Time">Part-time</button>
+                            <button id="filter-remote" class="w-full text-left py-2 px-4 rounded hover:bg-blue-100" data-filter="Remote">Remote</button>
+                            <button id="filter-reset" class="w-full text-left py-2 px-4 rounded hover:bg-gray-100">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- User Menu (Desktop) -->
+            <div class="hidden md:flex md:items-center md:gap-4">
+                <a href="#" class="text-blue-600 hover:text-blue-800 flex items-center gap-1">
+                    <i class="ri-user-line text-xl"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="/freelancerhome" class="text-blue-600 hover:text-blue-800 flex items-center gap-1">
+                    <i class="ri-home-line text-xl"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    
+   
+   
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="job-listings">
+            <% jobs.forEach(job => { %>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 relative flex flex-col justify-between job-item"
+                     data-job-title="<%= job.title %>"
+                     data-location="<%= job.location %>"
+                     data-job-type="<%= job.jobType %>">
+                    <!-- Job Details -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2"><%= job.title %></h3>
+                        <p class="text-gray-800 mb-2">Location: <%= job.location %></p>
+                        <p class="text-gray-800 mb-2">Salary: <%= job.salary %></p>
+                        <p class="text-gray-800 mb-4">Job Type: <%= job.jobType %></p>
+                        <p class="text-gray-800 mb-4">Application Deadline: <%= new Date(job.applicationDeadline).toLocaleDateString() %></p>
+                    </div>
+                    <!-- Company Logo and Name -->
+                    <div class="flex items-center mt-4">
+                        <img src="<%= job.companyLogo %>" alt="<%= job.company %> Logo" class="w-12 h-12 object-cover rounded-full mr-4 transition-transform duration-300 hover:scale-110">
+                        <p class="text-gray-800 font-semibold text-lg"><%= job.company %></p>
+                    </div>
+                    <!-- Job Details Button -->
+                    <a href="/job/<%= job._id %>" class="mt-4 inline-block text-blue-600 hover:text-blue-800 transition-colors duration-300">View Details</a>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+
+    <footer class="bg-white shadow-md py-4">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-800">&copy; 2024 ExpertLancer. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to filter job items
+            const filterJobs = () => {
+                const titleSearch = document.getElementById('search-title').value.toLowerCase();
+                const locationSearch = document.getElementById('search-location').value.toLowerCase();
+                const jobItems = document.querySelectorAll('.job-item');
+
+                jobItems.forEach(item => {
+                    const jobTitle = item.getAttribute('data-job-title').toLowerCase();
+                    const jobLocation = item.getAttribute('data-location').toLowerCase();
+                    if (jobTitle.includes(titleSearch) && jobLocation.includes(locationSearch)) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            };
+
+            // Event listener for desktop search button
+            document.getElementById('search-button').addEventListener('click', filterJobs);
+
+            // Event listener for mobile search button
+            document.getElementById('search-button-mobile').addEventListener('click', filterJobs);
+
+            // Function to toggle filter menu
+            const toggleFilterMenu = () => {
+                const filterMenu = document.getElementById('filter-menu');
+                filterMenu.classList.toggle('hidden');
+            };
+
+            // Event listener for filter button
+            document.getElementById('filter-button').addEventListener('click', toggleFilterMenu);
+
+            // Event listener for close menu button
+            document.getElementById('close-menu').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('translate-x-full');
+            });
+
+            // Event listener for menu toggle button
+            document.getElementById('menu-toggle').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.remove('translate-x-full');
+            });
+
+            // Event listener for filter items
+            document.querySelectorAll('[id^=filter-]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterValue = button.getAttribute('data-filter');
+                    const jobItems = document.querySelectorAll('.job-item');
+
+                    jobItems.forEach(item => {
+                        const jobType = item.getAttribute('data-job-type');
+                        if (filterValue === 'Reset' || jobType === filterValue) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+
+                    // Close the filter menu after selection
+                    document.getElementById('filter-menu').classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
