@@ -1,271 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Freelancer Registration - ExpertLancer</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0073e6; /* Set the background to blue */
-      color: #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-    }
-
-    .container {
-      background-color: #ffffff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      max-width: 700px;
-      width: 100%;
-    }
-
-    .intro-section {
-      text-align: center;
-      margin-bottom: 30px;
-      padding: 20px;
-      background-color: #005bb5;
-      border-radius: 12px;
-      color: #ffffff;
-      width: 100%;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #555;
-      font-size: 14px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 16px;
-      box-sizing: border-box;
-      transition: border-color 0.3s;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #007bff;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .skills-container {
-      display: flex;
-      flex-wrap: wrap;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 10px;
-      min-height: 50px;
-      background-color: #f9f9f9;
-      margin-top: 8px;
-    }
-
-    .skills-container .skill-tag {
-      background-color: #666666;
-      color: white;
-      border-radius: 5px;
-      padding: 15px 10px;
-      margin: 5px;
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-    }
-
-    .skills-container .skill-tag .remove-skill {
-      margin-left: 8px;
-      cursor: pointer;
-    }
-
-    .skills-dropdown {
-      position: absolute;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      width: 100%;
-      max-height: 150px;
-      overflow-y: auto;
-      display: none;
-      z-index: 10;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .skills-dropdown div {
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    .skills-dropdown div:hover {
-      background-color: #f0f0f0;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #007bff;
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Freelancer Registration - ExpertLancer</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+        }
+        .header {
+            background-color: #1a202c; /* Darker background for the header */
+            color: #edf2f7; /* Light text color */
+        }
+        .form-input-wrapper {
+            position: relative;
+        }
+        .form-input {
+            padding-left: 3rem; /* Space for the icon */
+            border-color: #cbd5e0; /* Light border color */
+            placeholder-color: #a0aec0; /* Light placeholder color */
+        }
+        .form-input:focus {
+            border-color: #3182ce; /* Blue border color on focus */
+            box-shadow: 0 0 0 2px rgba(49, 140, 231, 0.2); /* Blue shadow on focus */
+        }
+        .form-input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+        }
+        .submit-btn {
+            background-color: #2b6cb0; /* Darker blue for the button */
+            hover:bg-color: #2b6cb0; /* Darker blue on hover */
+        }
+        .new-user-link {
+            color: #63b3ed; /* Blue color for new user link */
+            text-decoration: underline; /* Underline on hover */
+        }
+        .error-message {
+            color: #e53e3e; /* Red color for error messages */
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            padding: 10px;
+            min-height: 50px;
+            background-color: #f9f9f9;
+            margin-top: 8px;
+        }
+        .skills-container .skill-tag {
+            background-color: #666666;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .skills-container .skill-tag .remove-skill {
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .skills-dropdown {
+            position: absolute;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .skills-dropdown div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .skills-dropdown div:hover {
+            background-color: #f0f0f0;
+        }
+        .header-button {
+            background-color: #2b6cb0; /* Darker blue for the button */
+            color: white; /* White text color */
+            padding: 0.5rem 1rem; /* Padding for the button */
+            border-radius: 0.25rem; /* Rounded corners */
+            text-decoration: none; /* Remove underline from the link */
+            font-weight: 600; /* Bold text */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+        .header-button:hover {
+            background-color: #2b6cb0; /* Darker blue on hover */
+        }
+        .home-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        .home-button:hover {
+            color: #0029f7;
+        }
+        .home-button i {
+            margin-right: 0.5rem;
+        }
+    </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
 
-  <div class="intro-section">
-    <h1>Welcome to ExpertLancer</h1>
+    <!-- Navigation Bar -->
+    <div class="relative">
+      <a href="/" class="home-button absolute top-4 right-6 flex items-center">
+          <i class="ri-home-line text-xl"></i> Home
+      </a>
+      <div class="flex justify-between items-center bg-white p-6 shadow-md">
+          <a class="text-2xl font-bold text-blue-600 whitespace-nowrap" href="/freelancerhome">ExpertLancer</a>
+      </div>
   </div>
 
-  <div class="container">
-    <h2>Freelancer Registration</h2>
-    <form action="/register-freelancer" method="POST">
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+    <!-- Main Content -->
+    <div class="flex flex-1 items-center justify-center p-6">
+        <div class="w-full max-w-lg bg-white p-10 rounded-xl shadow-lg flex flex-col gap-8">
+            <!-- Header -->
+            <div class="header py-5 px-7 rounded-lg text-center text-2xl font-semibold tracking-wide shadow-md">
+                <h1>ExpertLancer - Freelancer Registration</h1>
+            </div>
+
+            <!-- Registration Section -->
+            <div>
+                <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">Register</h3>
+                <form action="/register-freelancer" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
+                    <div class="form-input-wrapper">
+                      
+                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                               type="text"
+                               placeholder="Username"
+                               name="username"
+                               required>
+                    </div>
+                    <div class="form-input-wrapper">
+                        
+                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                               type="text"
+                               placeholder="Name"
+                               name="name"
+                               required>
+                    </div>
+                    <div class="form-input-wrapper">
+                        
+                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                               type="email"
+                               placeholder="Email"
+                               name="email"
+                               required>
+                    </div>
+                    <div class="form-input-wrapper">
+                     
+                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                               type="password"
+                               placeholder="Password"
+                               name="password"
+                               required>
+                    </div>
+                    <div class="form-input-wrapper">
+                    
+                        <input id="image" name="image" type="file" accept="image/*" aria-label="Upload Profile Image" class="form-input block w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300">
+                        <p class="text-gray-500 text-xs mt-1">Upload a profile image (optional)</p>
+                    </div>
+                    <div class="form-input-wrapper">
+                        
+                        <textarea class="form-input block w-full px-4 py-0 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                                  placeholder="Description"
+                                  name="description"
+                                  required></textarea>
+                    </div>
+                    <div class="form-input-wrapper">
+                       
+                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                               type="text"
+                               id="skills-input"
+                               placeholder="Enter a skill and press Enter">
+                        <div class="skills-container" id="skills-container"></div>
+                        <div class="skills-dropdown" id="skills-dropdown"></div>
+                        <input type="hidden" id="skills" name="skills">
+                    </div>
+                    <button type="submit" class="submit-btn w-full py-3 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 focus:outline-none transition-transform ease-in-out duration-300">
+                        Register
+                    </button>
+                    <div class="mt-8 text-center relative z-10">
+                        <a href="/login-freelancer" class="text-blue-600 hover:underline">Already have an account? Login here.</a>
+                    </div>
+                </form>
+                
+                <div id="error-message" class="error-message mt-4 hidden text-center font-semibold"></div>
+            </div>
+        </div>
+    </div>
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 py-12">
+  <div class="container mx-auto px-6">
+
+      <!-- Company Info Section -->
+      <div class="mb-12">
+          <div class="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
+              <!-- Company Description -->
+              <div class="w-full md:w-1/4">
+                  <h5 class="text-3xl font-bold mb-4 text-white">ExpertLancer</h5>
+                  <p class="mb-4 text-gray-400 leading-relaxed">
+                      ExpertLancer connects top-tier freelancers with innovative companies. Our platform offers a seamless experience to find and manage freelance projects, enhancing productivity and creating opportunities for talent worldwide.
+                  </p>
+                  <div class="flex space-x-4">
+                      <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Facebook">
+                          <i class="ri-facebook-line text-2xl"></i>
+                      </a>
+                      <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Twitter">
+                          <i class="ri-twitter-line text-2xl"></i>
+                      </a>
+                      <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="LinkedIn">
+                          <i class="ri-linkedin-line text-2xl"></i>
+                      </a>
+                      <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Instagram">
+                          <i class="ri-instagram-line text-2xl"></i>
+                      </a>
+                  </div>
+              </div>
+              <!-- Contact Information -->
+              <div class="w-full ml-40 md:w-1/3">
+                  <h5 class="text-lg font-semibold mb-4 text-white">Contact Us</h5>
+                  <ul class="space-y-2">
+                      <li class="text-gray-400">
+                          <i class="ri-mail-line mr-2"></i>
+                          <a href="mailto:info@expertlancer.com" class="hover:text-white">info@expertlancer.com</a>
+                      </li>
+                      <li class="text-gray-400">
+                          <i class="ri-phone-line mr-2"></i>
+                          <a href="tel:+123456789" class="hover:text-white">+1 (234) 567-89</a>
+                      </li>
+                      <li class="text-gray-400">
+                          <i class="ri-map-pin-line mr-2"></i>
+                          123 Freelancer Ave, Suite 456, City, Country
+                      </li>
+                  </ul>
+              </div>
+              <!-- Newsletter Signup -->
+              <div class="w-full md:w-1/3">
+                  <h5 class="text-lg font-semibold mb-4 text-white">Stay Updated</h5>
+                  <p class="mb-4 text-gray-400">Subscribe to our newsletter for the latest updates, job opportunities, and tips on maximizing your freelance career.</p>
+                  <form action="#" method="post" class="flex flex-col space-y-4">
+                      <input type="email" placeholder="Enter your email" class="p-3 rounded-md border border-gray-700 bg-gray-800 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition-colors duration-300">Subscribe</button>
+                  </form>
+              </div>
+          </div>
       </div>
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <!-- Additional Sections -->
+      <div class="flex flex-col md:flex-row justify-between mb-12">
+          <!-- Quick Links Section -->
+          <div class="w-full md:w-1/4 mb-6 md:mb-0">
+              <h5 class="text-lg font-semibold mb-4 text-white">Quick Links</h5>
+              <ul class="space-y-2">
+                  <li><a href="/" class="text-gray-400 hover:text-white">Home</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">Find Work</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">Find Freelancers</a></li>
+                  <li><a href="/login-user" class="text-gray-400 hover:text-white">Log In</a></li>
+                  <li><a href="/register-user" class="text-gray-400 hover:text-white">Sign Up</a></li>
+              </ul>
+          </div>
+          <!-- Resources Section -->
+          <div class="w-full md:w-1/4 mb-6 md:mb-0">
+              <h5 class="text-lg font-semibold mb-4 text-white">Resources</h5>
+              <ul class="space-y-2">
+                  <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">Community</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">API Documentation</a></li>
+              </ul>
+          </div>
+          <!-- Legal Section -->
+          <div class="w-full md:w-1/4">
+              <h5 class="text-lg font-semibold mb-4 text-white">Legal</h5>
+              <ul class="space-y-2">
+                  <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a></li>
+              </ul>
+          </div>
+          <!-- Features Section -->
+          <div class="w-full md:w-1/4">
+              <h5 class="text-lg font-semibold mb-4 text-white">Features</h5>
+              <ul class="space-y-2">
+                  <li><a href="#" class="text-gray-400 hover:text-white">Advanced Search</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">Project Management</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">Secure Payments</a></li>
+                  <li><a href="#" class="text-gray-400 hover:text-white">24/7 Support</a></li>
+              </ul>
+          </div>
       </div>
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <!-- Footer Bottom -->
+      <div class="text-center border-t border-gray-700 pt-6">
+          <p class="text-gray-500">&copy; 2024 ExpertLancer. All rights reserved.</p>
       </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-      </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" placeholder="Enter your description" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="skills">Skills:</label>
-        <input type="text" id="skills-input" placeholder="Enter a skill and press Enter">
-        <div class="skills-container" id="skills-container"></div>
-        <div class="skills-dropdown" id="skills-dropdown"></div>
-        <input type="hidden" id="skills" name="skills">
-      </div>
-      <button type="submit">Register</button>
-    </form>
   </div>
+</footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const errorMessageElement = document.getElementById('error-message');
 
-<script>
-  const skillsInput = document.getElementById('skills-input');
-  const skillsContainer = document.getElementById('skills-container');
-  const skillsDropdown = document.getElementById('skills-dropdown');
-  const skillsHiddenInput = document.getElementById('skills');
+            // Display server-side errors if available
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+            if (error) {
+                errorMessageElement.textContent = error;
+                errorMessageElement.classList.remove('hidden');
+            }
 
-  const skillSuggestions = [
-    'JavaScript', 'Python', 'HTML', 'CSS', 'React', 'Node.js', 
-    'Express', 'MongoDB', 'SQL', 'Java', 'C++', 'Ruby', 'PHP', 
-    'Swift', 'Kotlin', 'Docker', 'AWS', 'Azure', 'Git', 'Machine Learning',
-    'TypeScript', 'Sass', 'GraphQL', 'Firebase', 'PostgreSQL', 'Redis',
-    'JavaScript Frameworks', 'Jest', 'Laravel', 'Spring Boot', 'Django',
-    'Flutter', 'Vue.js', 'Angular', 'Terraform', 'Jenkins', 'CI/CD',
-    'Salesforce', 'Kubernetes', 'Elasticsearch', 'Blockchain', 'DevOps',
-    'Nginx', 'Apache', 'RabbitMQ', 'Swagger', 'Redux', 'Next.js',
-    'Strapi', 'Contentful', 'Shopify', 'Magento', 'WordPress', 'Drupal',
-    'WebAssembly', 'GraphQL', 'API Design', 'UX/UI Design', 'Product Management',
-    'Data Analysis', 'Big Data', 'Tableau', 'Power BI', 'Excel', 'Cloud Computing'
-];
+            // Skills functionality
+            const skillsInput = document.getElementById('skills-input');
+            const skillsContainer = document.getElementById('skills-container');
+            const skillsDropdown = document.getElementById('skills-dropdown');
 
-  let selectedSkills = [];
+            const skillSuggestions = ['JavaScript', 'Python', 'Java', 'C++', 'HTML', 'CSS', 'React', 'Node.js']; // Example skills
 
-  function updateSkillsInput() {
-    skillsHiddenInput.value = selectedSkills.join(',');
-  }
+            function addSkill(skill) {
+                if (skill && !Array.from(skillsContainer.children).some(tag => tag.textContent === skill)) {
+                    const skillTag = document.createElement('div');
+                    skillTag.textContent = skill;
+                    skillTag.className = 'skill-tag';
+                    const removeSkill = document.createElement('span');
+                    removeSkill.textContent = '×';
+                    removeSkill.className = 'remove-skill';
+                    removeSkill.onclick = () => {
+                        skillsContainer.removeChild(skillTag);
+                    };
+                    skillTag.appendChild(removeSkill);
+                    skillsContainer.appendChild(skillTag);
+                    updateSkillsInput();
+                }
+            }
 
-  function addSkill(skill) {
-    if (!selectedSkills.includes(skill)) {
-      selectedSkills.push(skill);
-      const skillTag = document.createElement('div');
-      skillTag.className = 'skill-tag';
-      skillTag.textContent = skill;
+            function updateSkillsInput() {
+                const skills = Array.from(skillsContainer.children).map(tag => tag.textContent.replace('×', '').trim());
+                document.getElementById('skills').value = skills.join(',');
+            }
 
-      const removeBtn = document.createElement('span');
-      removeBtn.className = 'remove-skill';
-      removeBtn.innerHTML = '&times;';
-      removeBtn.onclick = function() {
-        skillsContainer.removeChild(skillTag);
-        selectedSkills = selectedSkills.filter(s => s !== skill);
-        updateSkillsInput();
-      };
+            skillsInput.addEventListener('input', () => {
+                const value = skillsInput.value.toLowerCase();
+                skillsDropdown.innerHTML = '';
+                if (value) {
+                    const filteredSkills = skillSuggestions.filter(skill => skill.toLowerCase().includes(value));
+                    filteredSkills.forEach(skill => {
+                        const option = document.createElement('div');
+                        option.textContent = skill;
+                        option.onclick = () => {
+                            addSkill(skill);
+                            skillsInput.value = '';
+                            skillsDropdown.style.display = 'none';
+                        };
+                        skillsDropdown.appendChild(option);
+                    });
+                    skillsDropdown.style.display = 'block';
+                } else {
+                    skillsDropdown.style.display = 'none';
+                }
+            });
 
-      skillTag.appendChild(removeBtn);
-      skillsContainer.appendChild(skillTag);
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.form-input-wrapper')) {
+                    skillsDropdown.style.display = 'none';
+                }
+            });
 
-      updateSkillsInput();
-    }
-    skillsInput.value = '';
-    skillsDropdown.style.display = 'none';
-  }
-
-  skillsInput.addEventListener('input', function() {
-    const query = skillsInput.value.toLowerCase();
-    skillsDropdown.innerHTML = '';
-    if (query) {
-      const filteredSkills = skillSuggestions.filter(skill => 
-        skill.toLowerCase().includes(query)
-      );
-      filteredSkills.forEach(skill => {
-        const div = document.createElement('div');
-        div.textContent = skill;
-        div.addEventListener('click', () => addSkill(skill));
-        skillsDropdown.appendChild(div);
-      });
-      skillsDropdown.style.display = filteredSkills.length ? 'block' : 'none';
-    } else {
-      skillsDropdown.style.display = 'none';
-    }
-  });
-
-  skillsInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' && skillsInput.value.trim()) {
-      event.preventDefault();
-      addSkill(skillsInput.value.trim());
-    }
-  });
-
-  document.addEventListener('click', function(event) {
-    if (!skillsDropdown.contains(event.target) && event.target !== skillsInput) {
-      skillsDropdown.style.display = 'none';
-    }
-  });
-</script>
-
+            // Handle form submission errors
+            document.querySelector('form').addEventListener('submit', (e) => {
+                if (!document.querySelector('input[name="username"]').value || !document.querySelector('input[name="name"]').value) {
+                    e.preventDefault();
+                    errorMessageElement.textContent = 'All fields are required.';
+                    errorMessageElement.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

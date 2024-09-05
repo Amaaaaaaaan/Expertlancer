@@ -6,17 +6,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apply for <%= job.title %></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        /* Checkmark Animation Styles */
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+        }
+        .checkmark-circle {
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke: #4CAF50;
+        }
+        .checkmark-check {
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke: #4CAF50;
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            animation: checkmark 0.5s ease-in-out forwards;
+        }
+        .checkmark-circle {
+            stroke-dasharray: 150;
+            stroke-dashoffset: 150;
+            animation: circle 0.5s ease-in-out forwards;
+        }
+        @keyframes checkmark {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        @keyframes circle {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
 </head>
 
 <body class="min-h-screen flex flex-col bg-gray-100">
     <!-- Navbar Header -->
     <header class="bg-white shadow-md py-4 px-6">
         <div class="container mx-auto flex items-center justify-between">
-            <!-- Logo -->
-            <a class="flex items-center space-x-2 text-2xl font-bold text-blue-600" href="/">
-            
-                <span>ExpertLancer</span>
-            </a>
+            <!-- Logo (Left Side) -->
+            <a class="text-2xl font-bold text-blue-600 whitespace-nowrap" href="/freelancerhome">ExpertLancer</a>
+    
+            <!-- Desktop Menu (Right Side) -->
+            <nav class="hidden md:flex md:items-center md:gap-4">
+                <a href="/freelancer-profile" class="text-blue-600 hover:text-blue-800 flex items-center gap-1" aria-label="Profile">
+                    <i class="ri-user-line text-xl"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="/freelancerhome" class="text-blue-600 hover:text-blue-800 flex items-center gap-1" aria-label="Home">
+                    <i class="ri-home-line text-xl"></i>
+                    <span>Home</span>
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-blue-600 hover:text-blue-800" id="mobile-menu-button" aria-label="Toggle menu">
+                <i class="ri-menu-line text-xl"></i>
+            </button>
         </div>
     </header>
 
@@ -24,7 +101,7 @@
     <main class="flex-grow container mx-auto px-4 py-8">
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
             <h1 class="text-3xl font-bold mb-6 text-gray-900">Apply for <%= job.title %></h1>
-            <form action="/apply/<%= job._id %>" method="post" enctype="multipart/form-data">
+            <form id="apply-form" action="/apply/<%= job._id %>" method="post" enctype="multipart/form-data">
                 <div class="space-y-4">
                     <div>
                         <label for="name" class="block text-gray-700 font-semibold">Name:</label>
@@ -38,7 +115,6 @@
                         <label for="resume" class="block text-gray-700 font-semibold">Resume (PDF only):</label>
                         <input type="file" id="resume" name="resume" accept=".pdf" class="mt-1 p-2 border border-gray-300 rounded-lg w-full" required>
                     </div>
-                   
                 </div>
                 <div class="mt-8 text-center">
                     <button type="submit" class="bg-blue-600 text-white py-3 px-6 rounded-lg shadow hover:bg-blue-700 transition">Submit Application</button>
@@ -53,6 +129,32 @@
             <p>© 2024 ExpertLancer. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" />
+                <path class="checkmark-check" d="M14 27l6 6L38 17" />
+            </svg>
+            <h2 class="text-xl font-semibold mb-4">Application Submitted</h2>
+            <p>Your details have been sent to the organization.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('apply-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Show the modal
+            document.getElementById('success-modal').style.display = 'flex';
+
+            // Redirect after 3 seconds
+            setTimeout(function() {
+                window.location.href = '/freelancerhome'; // Replace with your freelancer home page URL
+            }, 3000); // 3000 milliseconds = 3 seconds
+        });
+    </script>
 </body>
 
 </html>

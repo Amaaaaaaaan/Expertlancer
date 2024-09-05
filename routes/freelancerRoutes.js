@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const upload = require('../config/multer-config'); // Adjust path as needed
 
@@ -12,49 +12,51 @@ const {
     jobdisplayController,
     jobDetailsController, 
     applyNowPageController, 
-    submitApplication ,
+    submitApplication,
     projectdisplayController,
-    projectDetailsController
-} = require("../controllers/freelancerController");
+    projectDetailsController,
+    viewfreelancerprofileController,
+    editProfilePageController, // New route handler
+    updateProfileController    // New route handler
+} = require('../controllers/freelancerController');
 
 const {
     isFreelancerLoggedIn,
     redirectIfFreelancerLoggedIn
 } = require('../middlewares/freelancerMiddleware');
 
-router.get("/", homepageController);
-
-// Login routes
+// Existing routes...
+router.get("/", redirectIfFreelancerLoggedIn, homepageController);
 router.get('/login-freelancer', redirectIfFreelancerLoggedIn, loginfreelancerpageController);
-router.post('/login-freelancer', async (req, res) => {
+router.post('/login-freelancer', redirectIfFreelancerLoggedIn, async (req, res) => {
     try {
         await loginFreelancer(req, res);
     } catch (error) {
         res.redirect(`/login-freelancer?error=${encodeURIComponent(error.message)}`);
     }
 });
-
-// Registration routes
 router.get('/register-freelancer', redirectIfFreelancerLoggedIn, registerFreelancerPageController);
-router.post('/register-freelancer', async (req, res) => {
+router.post('/register-freelancer', upload.single('image'), async (req, res) => {
     try {
         await registerFreelancer(req, res);
     } catch (error) {
         res.redirect(`/register-freelancer?error=${encodeURIComponent(error.message)}`);
     }
 });
-
-// Freelancer home
 router.get('/freelancerhome', isFreelancerLoggedIn, homeafterloginController);
+router.get('/freelancer-profile', isFreelancerLoggedIn, viewfreelancerprofileController);
 
-// Job display and details
+// New routes for editing and updating profiles
+router.get('/edit-profile', isFreelancerLoggedIn, editProfilePageController);
+router.post('/edit-profile', isFreelancerLoggedIn, upload.single('image'), updateProfileController);
+
+// Job display and details routes
 router.get('/jobdisplay', isFreelancerLoggedIn, jobdisplayController);
 router.get('/job/:id', isFreelancerLoggedIn, jobDetailsController);
-
 router.get('/apply/:id', isFreelancerLoggedIn, applyNowPageController);
 router.post('/apply/:id', isFreelancerLoggedIn, upload.single('resume'), submitApplication);
 
-// Project display
+// Project display routes
 router.get('/projectdisplay', isFreelancerLoggedIn, projectdisplayController);
 router.get('/project/:id', isFreelancerLoggedIn, projectDetailsController);
 

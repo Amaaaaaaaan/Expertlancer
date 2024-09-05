@@ -7,8 +7,45 @@
     <title>ExpertLancer - Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+
     <style>
-        /* Additional custom styles */
+        body::-webkit-scrollbar {
+    width: 10px; /* Slightly wider for a more prominent look */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #7e7e7e, #3e3e3e); /* Professional blue gradient */
+    border-radius: 8px; /* Slightly rounded corners */
+    border: 2px solid #f8f9fa; /* Light border to stand out */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0056b3, #003d80); /* Darker blue on hover */
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f3f5; /* Light gray track background for a clean look */
+    border-radius: 8px;
+}
+        #messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #messages::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #4A90E2, #003366);
+            border-radius: 10px;
+            border: 2px solid white;
+        }
+
+        #messages::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #357ABD, #001F4D);
+        }
+
+        #messages::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+
         .feature-box img {
             width: 64px;
             height: 64px;
@@ -35,7 +72,123 @@
                 /* 12px */
             }
         }
+
+        /* Container for messages */
+        #messages {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 75%;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-out; /* Add slide-in animation */
+}
+
+.message.incoming {
+    background-color: #f1f1f1;
+    align-self: flex-start;
+    border-radius: 8px 8px 8px 0;
+}
+
+.message.outgoing {
+    background-color: #007bff;
+    color: #ffffff;
+    align-self: flex-end;
+    border-radius: 8px 8px 0 8px;
+}
+
+.message .content {
+    display: flex;
+    align-items: center;
+}
+
+.message .content p {
+    margin: 0;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+.message .username {
+    margin-right: 10px; /* Space between username and message */
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #555; /* Gray color for username */
+}
+
+.message.outgoing .username {
+    color: #ffffff; /* White color for outgoing username */
+}
+
+.message p {
+    margin: 0;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+.chat-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+    .message {
+        max-width: 90%;
+        padding: 8px;
+    }
+}
+
+.message:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+#message {
+    width: calc(100% - 80px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+#sendButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#sendButton:hover {
+    background: linear-gradient(45deg, #0056b3, #007bff);
+}
+
+/* Slide-in animation for new messages */
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
     </style>
+
 </head>
 
 <body class="bg-gray-100 text-gray-900">
@@ -43,7 +196,7 @@
     <!-- Header -->
     <header class="bg-white p-4 md:p-5 flex justify-between items-center shadow-md">
         <div class="flex justify-between items-center w-full md:w-auto">
-            <a class="text-2xl font-bold mr-40 text-blue-600 whitespace-nowrap" href="/">ExpertLancer</a>
+            <a class="text-2xl font-bold mr-40 text-blue-600 whitespace-nowrap" href="/freelancerhome">ExpertLancer</a>
             <button id="menu-toggle" class="md:hidden flex items-center text-gray-600 hover:text-blue-600">
                 <i class="ri-menu-line text-xl"></i>
             </button>
@@ -55,14 +208,14 @@
                             class="ri-home-line text-xl mr-2"></i>Home</a></li>
                 <li><a href="/projectdisplay" class="hover:text-blue-600 flex items-center"><i
                             class="ri-user-search-line text-xl mr-2"></i>Find Work</a></li>
-                            <li><a href="/jobdisplay" class="hover:text-blue-600 flex items-center"><i
-                                class="ri-user-search-line text-xl mr-2"></i>Find Job</a></li>
-                <li><a href="#" class="hover:text-blue-600 flex items-center"><i
+                <li><a href="/jobdisplay" class="hover:text-blue-600 flex items-center"><i
+                            class="ri-user-search-line text-xl mr-2"></i>Find Job</a></li>
+                <li><a href="/freelancer-profile" class="hover:text-blue-600 flex items-center"><i
                             class="ri-user-line text-xl mr-2"></i>Profile</a></li>
             </ul>
         </nav>
         <div class="hidden md:flex items-center space-x-4">
-            
+
             <a href="/logout" class="text-red-600 hover:text-red-800 text-xl md:text-2xl flex items-center"><i
                     class="ri-logout-box-line"></i>Logout</a>
         </div>
@@ -75,8 +228,8 @@
                         class="ri-home-line text-xl mr-2"></i>Home</a></li>
             <li><a href="/projectdisplay" class="hover:text-blue-600 flex items-center"><i
                         class="ri-briefcase-line text-xl mr-2"></i>Find work</a></li>
-                        <li><a href="/jobdisplay" class="hover:text-blue-600 flex items-center"><i
-                            class="ri-briefcase-line text-xl mr-2"></i>Find job</a></li>
+            <li><a href="/jobdisplay" class="hover:text-blue-600 flex items-center"><i
+                        class="ri-briefcase-line text-xl mr-2"></i>Find job</a></li>
             <li><a href="#" class="hover:text-blue-600 flex items-center"><i
                         class="ri-user-line text-xl mr-2"></i>Profile</a></li>
             <li><a href="/logout" class="text-red-600 hover:text-red-800 flex items-center"><i
@@ -87,40 +240,132 @@
     <section class="text-center py-8 md:py-12 bg-blue-50">
         <div class="container mx-auto px-4">
             <h1 class="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Find the Perfect Work for Your Skills</h1>
-            <p class="text-base md:text-lg text-gray-600 mb-4 md:mb-6">Explore thousands of freelance opportunities across various fields. ExpertLancer connects you with clients globally.</p>
+            <p class="text-base md:text-lg text-gray-600 mb-4 md:mb-6">Explore thousands of freelance opportunities
+                across various fields. ExpertLancer connects you with clients globally.</p>
             <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
 
-                <a href="/jobdisplay" class="bg-transparent border border-blue-600 text-blue-600 py-2 px-4 md:py-3 md:px-6 rounded-lg font-bold text-center hover:bg-blue-600 hover:text-white">Browse Jobs</a>
-                <a href="/projectdisplay" class="bg-transparent border border-blue-600 text-blue-600 py-2 px-4 md:py-3 md:px-6 rounded-lg font-bold text-center hover:bg-blue-600 hover:text-white">Search for Work</a>
-                
+                <a href="/jobdisplay"
+                    class="bg-transparent border border-blue-600 text-blue-600 py-2 px-4 md:py-3 md:px-6 rounded-lg font-bold text-center hover:bg-blue-600 hover:text-white">Browse
+                    Jobs</a>
+                <a href="/projectdisplay"
+                    class="bg-transparent border border-blue-600 text-blue-600 py-2 px-4 md:py-3 md:px-6 rounded-lg font-bold text-center hover:bg-blue-600 hover:text-white">Search
+                    for Work</a>
+
             </div>
         </div>
     </section>
 
-  <!-- Client Testimonials Section -->
-<section class="py-10 bg-gradient-to-r from-blue-100 to-blue-200 text-center">
+    <!-- Chat with Freelancers Community -->
+    <section class="py-10 bg-gradient-to-r from-blue-100 to-blue-200 text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-blue-600 mb-8">Connect with Freelancers Community</h2>
+            <p class="text-lg text-gray-600 mb-8">
+                Join our community of freelancers to discuss projects, share ideas, and find collaboration
+                opportunities. Click the button below to start chatting with other members of the community.
+            </p>
+
+            <!-- Trigger Button -->
+            <button id="openChat" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
+                Connect with freelancers community
+            </button>
+        </div>
+    </section>
+
+    <!-- Chat Popup Container -->
+    <div id="chatPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="relative bg-white border border-gray-200 shadow-lg rounded-lg p-6 max-w-2xl w-full">
+            <!-- Close Button -->
+            <button id="closeChat" class="absolute top-0  right-1 text-red-500 hover:text-red-800 text-2xl font-bold">
+                &times;
+            </button>
+
+            <!-- Chat Header -->
+            <div class="text-center mb-6">
+                <h2
+                    class="text-3xl font-bold text-white bg-gradient-to-r from-blue-600 to-blue-400 py-3 rounded-lg shadow-sm">
+                    Freelancers Community Chat
+                </h2>
+                <p class="text-sm text-gray-600 mt-2">Connect and collaborate with other freelancers in real-time.</p>
+            </div>
+
+            <!-- Chat Content -->
+            <div class="flex flex-col h-80">
+                <div id="messages"
+                    class="bg-gray-100 border border-gray-300 rounded-lg shadow-inner p-4 flex-grow overflow-y-auto">
+                    <!-- Messages will be dynamically inserted here -->
+                </div>
+                <div class="flex items-center mt-4">
+                    <input type="text" id="message" placeholder="Type your message..."
+                        class="flex-grow h-12 p-3 border border-gray-300 rounded-lg mr-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <button id="sendButton"
+                        class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Highlighted Projects Section -->
+<section class="py-10 bg-white text-center">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-blue-600 mb-8">What Our Clients Say</h2>
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-box bg-white p-6 rounded-lg shadow-lg">
-                <p class="text-gray-600 mb-4">"The team was fantastic to work with! Their creativity and attention to detail exceeded our expectations."</p>
-                <h3 class="text-xl font-semibold text-blue-600">Emily R.</h3>
-                <p class="text-sm text-gray-500">CEO, Creative Agency</p>
+        <h2 class="text-3xl font-bold text-blue-600 mb-8">Highlighted Projects</h2>
+        <p class="text-lg text-gray-600 mb-12">
+            We have selected some projects according to your skills
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-800">Interactive Recipe Adjuster</h3>
+                <p class="text-gray-500 mb-4">"A dynamic web application that allows users to adjust recipes based on ingredient availability and serving size, with real-time updates."</p>
+                <a href="#" class="text-blue-600 hover:text-blue-800 font-bold">View Details</a>
             </div>
-            
-            <!-- Testimonial 2 -->
-            <div class="testimonial-box bg-white p-6 rounded-lg shadow-lg">
-                <p class="text-gray-600 mb-4">"Outstanding service and quality. They delivered exactly what we needed, on time and within budget."</p>
-                <h3 class="text-xl font-semibold text-blue-600">Michael T.</h3>
-                <p class="text-sm text-gray-500">Founder, Tech Startup</p>
+
+            <!-- Project 2 -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-800">Live Chat App</h3>
+                <p class="text-gray-500 mb-4">"A real-time chat application built using Node.js, Socket.io, and MongoDB, featuring multiple chat rooms and private messaging."</p>
+                <a href="#" class="text-blue-600 hover:text-blue-800 font-bold">View Details</a>
             </div>
-            
-            <!-- Testimonial 3 -->
-            <div class="testimonial-box bg-white p-6 rounded-lg shadow-lg">
-                <p class="text-gray-600 mb-4">"Their expertise in design and development helped our project reach new heights. Highly recommend!"</p>
-                <h3 class="text-xl font-semibold text-blue-600">Sarah W.</h3>
-                <p class="text-sm text-gray-500">Marketing Director, E-commerce Brand</p>
+
+            <!-- Project 3 -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-800">Freelancer Dashboard</h3>
+                <p class="text-gray-500 mb-4">"A comprehensive dashboard for freelancers to manage their projects, track earnings, and apply for new jobs seamlessly."</p>
+                <a href="#" class="text-blue-600 hover:text-blue-800 font-bold">View Details</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Jobs According to Your Interest Section -->
+<section class="py-10 bg-white text-center">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-blue-600 mb-8">Jobs According to Your Interests</h2>
+        <p class="text-lg text-gray-600 mb-12">
+            Explore job opportunities that match your skills and interests.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Job 1 -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-800">Frontend Developer</h3>
+                <p class="text-gray-500 mb-4">"Looking for a skilled frontend developer proficient in React and Tailwind CSS to work on a dynamic web application..."</p>
+                <a href="/job/1" class="text-blue-600 hover:text-blue-800 font-bold">View Job</a>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-800">Backend Developer</h3>
+                <p class="text-gray-500 mb-4">"Seeking an experienced backend developer with knowledge in Node.js, Express, and MongoDB for a scalable project..."</p>
+                <a href="/job/2" class="text-blue-600 hover:text-blue-800 font-bold">View Job</a>
+            </div>
+
+            <!-- Job 3 -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-800">UI/UX Designer</h3>
+                <p class="text-gray-500 mb-4">"Hiring a creative UI/UX designer to design user-friendly interfaces for a mobile application in the e-commerce sector..."</p>
+                <a href="/job/3" class="text-blue-600 hover:text-blue-800 font-bold">View Job</a>
             </div>
         </div>
     </div>
@@ -130,33 +375,207 @@
 
 
 
+
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-100 py-6">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap justify-between items-center">
-                <div class="w-full md:w-auto mb-4 md:mb-0">
-                    <h5 class="text-lg font-bold mb-2">ExpertLancer</h5>
-                    <p>Connecting talent with opportunity.</p>
+<footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="container mx-auto px-6">
+
+        <!-- Company Info Section -->
+        <div class="mb-12">
+            <div class="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
+                <!-- Company Description -->
+                <div class="w-full md:w-1/4">
+                    <h5 class="text-3xl font-bold mb-4 text-white">ExpertLancer</h5>
+                    <p class="mb-4 text-gray-400 leading-relaxed">
+                        ExpertLancer connects top-tier freelancers with innovative companies. Our platform offers a seamless experience to find and manage freelance projects, enhancing productivity and creating opportunities for talent worldwide.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Facebook">
+                            <i class="ri-facebook-line text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Twitter">
+                            <i class="ri-twitter-line text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="LinkedIn">
+                            <i class="ri-linkedin-line text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Instagram">
+                            <i class="ri-instagram-line text-2xl"></i>
+                        </a>
+                    </div>
                 </div>
-                <ul class="flex flex-col md:flex-row md:space-x-6 space-y-4 md:space-y-0">
-                    <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white">Find work</a></li>
-                   
-                </ul>
-            </div>
-            <div class="text-center mt-4 text-gray-500">
-                <p>&copy; 2024 ExpertLancer. All rights reserved.</p>
+                <!-- Contact Information -->
+                <div class="w-full ml-40 md:w-1/3">
+                    <h5 class="text-lg font-semibold mb-4 text-white">Contact Us</h5>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400">
+                            <i class="ri-mail-line mr-2"></i>
+                            <a href="mailto:info@expertlancer.com" class="hover:text-white">info@expertlancer.com</a>
+                        </li>
+                        <li class="text-gray-400">
+                            <i class="ri-phone-line mr-2"></i>
+                            <a href="tel:+123456789" class="hover:text-white">+1 (234) 567-89</a>
+                        </li>
+                        <li class="text-gray-400">
+                            <i class="ri-map-pin-line mr-2"></i>
+                            123 Freelancer Ave, Suite 456, City, Country
+                        </li>
+                    </ul>
+                </div>
+                <!-- Newsletter Signup -->
+                <div class="w-full md:w-1/3">
+                    <h5 class="text-lg font-semibold mb-4 text-white">Stay Updated</h5>
+                    <p class="mb-4 text-gray-400">Subscribe to our newsletter for the latest updates, job opportunities, and tips on maximizing your freelance career.</p>
+                    <form action="#" method="post" class="flex flex-col space-y-4">
+                        <input type="email" placeholder="Enter your email" class="p-3 rounded-md border border-gray-700 bg-gray-800 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition-colors duration-300">Subscribe</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </footer>
 
+        <!-- Additional Sections -->
+        <div class="flex flex-col md:flex-row justify-between mb-12">
+            <!-- Quick Links Section -->
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h5 class="text-lg font-semibold mb-4 text-white">Quick Links</h5>
+                <ul class="space-y-2">
+                    <li><a href="/" class="text-gray-400 hover:text-white">Home</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Find Work</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Find Freelancers</a></li>
+                    <li><a href="/login-user" class="text-gray-400 hover:text-white">Log In</a></li>
+                    <li><a href="/register-user" class="text-gray-400 hover:text-white">Sign Up</a></li>
+                </ul>
+            </div>
+            <!-- Resources Section -->
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h5 class="text-lg font-semibold mb-4 text-white">Resources</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Community</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">API Documentation</a></li>
+                </ul>
+            </div>
+            <!-- Legal Section -->
+            <div class="w-full md:w-1/4">
+                <h5 class="text-lg font-semibold mb-4 text-white">Legal</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <!-- Features Section -->
+            <div class="w-full md:w-1/4">
+                <h5 class="text-lg font-semibold mb-4 text-white">Features</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Advanced Search</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Project Management</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Secure Payments</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">24/7 Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="text-center border-t border-gray-700 pt-6">
+            <p class="text-gray-500">&copy; 2024 ExpertLancer. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+    <script
+        type="text/javascript">window.$crisp = []; window.CRISP_WEBSITE_ID = "2d25c9a8-52e4-47ec-a2bc-0375cb39fb1e"; (function () { d = document; s = d.createElement("script"); s.src = "https://client.crisp.chat/l.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })();</script>
+
+    </script>
 
     <script>
         document.getElementById('menu-toggle').addEventListener('click', function () {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
         });
+        // Get elements
+        const openChatButton = document.getElementById('openChat');
+        const chatPopup = document.getElementById('chatPopup');
+        const closeChatButton = document.getElementById('closeChat');
+
+        // Show chat popup on button click
+        openChatButton.addEventListener('click', () => {
+            chatPopup.classList.remove('hidden');
+        });
+
+        // Hide chat popup on close button click
+        closeChatButton.addEventListener('click', () => {
+            chatPopup.classList.add('hidden');
+        });
+
+        // Optionally close the popup if clicking outside the chat container
+        chatPopup.addEventListener('click', (event) => {
+            if (event.target === chatPopup) {
+                chatPopup.classList.add('hidden');
+            }
+        });
+
     </script>
+
+    <script>
+        // Assuming 'freelancer' is an object with a 'username' property
+        const username = '<%= freelancer.username %>';
+    </script>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>const socket = io();
+        const sendbtn = document.getElementById('sendButton');
+        const messageInput = document.getElementById('message');
+        const allmessages = document.getElementById('messages');
+
+        // Handle incoming chat history
+        socket.on('chatHistory', (messages) => {
+            messages.forEach(data => {
+                const p = document.createElement("div");
+                p.classList.add("message", data.username === username ? "outgoing" : "incoming");
+                p.innerHTML = `
+          <span class="username">${data.username}:</span>
+          <p>${data.text}</p>
+        `;
+                allmessages.appendChild(p);
+            });
+            allmessages.scrollTop = allmessages.scrollHeight; // Scroll to the bottom
+        });
+
+        // Handle incoming messages
+        socket.on('message', (data) => {
+            const p = document.createElement("div");
+            p.classList.add("message", data.username === username ? "outgoing" : "incoming");
+            p.innerHTML = `
+        <span class="username">${data.username}:</span>
+        <p>${data.text}</p>
+      `;
+            allmessages.appendChild(p);
+            allmessages.scrollTop = allmessages.scrollHeight; // Scroll to the bottom
+        });
+
+        // Send a new message
+        sendbtn.addEventListener("click", () => {
+            const message = messageInput.value.trim();
+            if (message) {
+                // Emit the message with the actual username included
+                socket.emit('newmessage', { text: message, username: username });
+                messageInput.value = ""; // Clear input field
+            }
+        });
+
+        // Send message on Enter key press
+        messageInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                sendbtn.click();
+            }
+        });
+    </script>
+
+
 
 </body>
 

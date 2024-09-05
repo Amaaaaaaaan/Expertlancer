@@ -6,18 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Details</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
 </head>
 
 <body class="min-h-screen flex flex-col bg-gray-100">
-    <!-- Navbar Header -->
-    <header class="bg-white shadow-md py-4 px-6">
+      <!-- Navbar Header -->
+      <header class="bg-white shadow-md py-4 px-6">
         <div class="container mx-auto flex items-center justify-between">
-            <!-- Logo -->
-            <a class="flex items-center space-x-2 text-2xl font-bold text-blue-600" href="/">
-              
-                <span>ExpertLancer</span>
-            </a>
-            <!-- Additional Navbar Code (if any) -->
+            <!-- Logo (Left Side) -->
+            <a class="text-2xl font-bold text-blue-600 whitespace-nowrap" href="/freelancerhome">ExpertLancer</a>
+    
+            <!-- Desktop Menu (Right Side) -->
+            <nav class="hidden md:flex md:items-center md:gap-4">
+                <a href="/freelancer-profile" class="text-blue-600 hover:text-blue-800 flex items-center gap-1" aria-label="Profile">
+                    <i class="ri-user-line text-xl"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="/freelancerhome" class="text-blue-600 hover:text-blue-800 flex items-center gap-1" aria-label="Home">
+                    <i class="ri-home-line text-xl"></i>
+                    <span>Home</span>
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-blue-600 hover:text-blue-800" id="mobile-menu-button" aria-label="Toggle menu">
+                <i class="ri-menu-line text-xl"></i>
+            </button>
         </div>
     </header>
 

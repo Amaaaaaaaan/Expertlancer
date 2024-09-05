@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Edit Profile - ExpertLancer</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f7f7f7 0%, #ffffff 100%);
+        }
+        .header {
+            background-color: #1a202c;
+            color: #edf2f7;
+        }
+        .form-input-wrapper {
+            position: relative;
+        }
+        .form-input {
+            padding-left: 3rem;
+            border-color: #cbd5e0;
+            color: #4a5568;
+        }
+        .form-input:focus {
+            border-color: #3182ce;
+            box-shadow: 0 0 0 2px rgba(49, 140, 231, 0.2);
+        }
+        .form-input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+        }
+        .submit-btn {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #2b6cb0;
+        }
+        .new-user-link {
+            color: #63b3ed;
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #e53e3e;
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            padding: 10px;
+            min-height: 50px;
+            background-color: #f9f9f9;
+            margin-top: 8px;
+        }
+        .skills-container .skill-tag {
+            background-color: #666666;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .skills-container .skill-tag .remove-skill {
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .skills-dropdown {
+            position: absolute;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: calc(100% - 2rem); /* Adjusted width for padding */
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .skills-dropdown div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .skills-dropdown div:hover {
+            background-color: #f0f0f0;
+        }
+        .header-button {
+            background-color: #2b6cb0;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .header-button:hover {
+            background-color: #2b6cb0;
+        }
+        .home-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        .home-button:hover {
+            color: #0029f7;
+        }
+        .home-button i {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navigation Bar -->
+    <div class="relative">
+      <a href="/freelancerhome" class="home-button absolute top-4 right-6 flex items-center">
+          <i class="ri-home-line text-xl"></i> Home
+      </a>
+      <div class="flex justify-between items-center bg-white p-6 shadow-md">
+          <a class="text-2xl font-bold text-blue-600 whitespace-nowrap" href="/freelancerhome">ExpertLancer</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex flex-1 items-center justify-center p-6">
+        <div class="w-full max-w-lg bg-white p-10 rounded-xl shadow-lg flex flex-col gap-8">
+            <!-- Header -->
+            <div class="header py-5 px-7 rounded-lg text-center text-2xl font-semibold tracking-wide shadow-md">
+                <h1>Edit Profile</h1>
+            </div>
+
+            <!-- Edit Profile Section -->
+            <div>
+                <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">Update Your Profile</h3>
+                <form action="/edit-profile" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
+                    <div class="form-input-wrapper">
+                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                               type="text"
+                               placeholder="Username"
+                               name="username"
+                               value="<%= freelancer.username %>"
+                               required>
+                    </div>
+                    <div class="form-input-wrapper">
+                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                               type="text"
+                               placeholder="Name"
+                               name="name"
+                               value="<%= freelancer.name %>"
+                               required>
+                    </div>
+                    <div class="form-input-wrapper">
+                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                               type="email"
+                               placeholder="Email"
+                               name="email"
+                               value="<%= freelancer.email %>"
+                               required
+                               autocomplete="off">
+                    </div>
+                    <div class="form-input-wrapper">
+                        <textarea class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                                  placeholder="Description"
+                                  name="description"
+                                  required><%= freelancer.description %></textarea>
+                    </div>
+                    <div class="form-input-wrapper relative">
+                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300"
+                               type="text"
+                               id="skills-input"
+                               placeholder="Enter a skill and press Enter">
+                               
+                        <div class="skills-container" id="skills-container">
+                            <% freelancer.skills.forEach(skill => { %>
+                                <span class="skill-tag" data-skill="<%= skill %>"><%= skill %><span class="remove-skill">×</span></span>
+                            <% }) %>
+                        </div>
+                        <div class="skills-dropdown" id="skills-dropdown">
+                            <!-- Skills dropdown items will be added dynamically -->
+                        </div>
+                        <input type="hidden" id="skills" name="skills" value="<%= freelancer.skills.join(', ') %>">
+                    </div>
+                    <button type="submit" class="submit-btn w-full py-3 rounded-lg font-semibold shadow-md hover:bg-blue-700 focus:outline-none transition-transform ease-in-out duration-300">
+                        Update Profile
+                    </button>
+                    <div class="mt-8 text-center relative z-10">
+                        <a href="/freelancerhome" class="text-blue-600 hover:underline">Back to Home</a>
+                    </div>
+                </form>
+                
+                <div id="error-message" class="error-message mt-4 hidden text-center font-semibold"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 text-center">
+        <p>&copy; 2024 ExpertLancer. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillsInput = document.getElementById('skills-input');
+            const skillsContainer = document.getElementById('skills-container');
+            const skillsDropdown = document.getElementById('skills-dropdown');
+            const errorMessage = document.getElementById('error-message');
+            const skillTags = [...document.querySelectorAll('.skill-tag')].map(tag => tag.innerText.slice(0, -1));
+            const skills = [
+    'JavaScript', 'Python', 'Java', 'C++', 'Ruby', 'Go', 'Swift', 'PHP',
+    'TypeScript', 'HTML', 'CSS', 'SQL', 'NoSQL', 'MongoDB', 'MySQL',
+    'PostgreSQL', 'Redis', 'Docker', 'Kubernetes', 'AWS', 'Azure',
+    'Google Cloud Platform', 'Node.js', 'Express.js', 'React', 'Angular',
+    'Vue.js', 'Sass', 'Less', 'GraphQL', 'REST', 'JUnit', 'Mocha',
+    'Jest', 'Cucumber', 'Ruby on Rails', 'Django', 'Flask', 'Spring Boot',
+    'ASP.NET', 'Laravel', 'Symfony', 'Golang', 'Rust', 'Solidity', 'Scala',
+    'Haskell', 'Erlang', 'SwiftUI', 'Objective-C', 'Kotlin', 'R', 'MATLAB',
+    'VHDL', 'Verilog', 'C#', 'PowerShell', 'Shell Scripting', 'Git', 'GitHub',
+    'GitLab', 'Jenkins', 'CI/CD', 'Terraform', 'Ansible', 'Chef', 'Puppet',
+    'Vagrant', 'Nginx', 'Apache', 'Redis', 'Elasticsearch', 'RabbitMQ',
+    'Apache Kafka', 'Memcached', 'Stripe', 'PayPal', 'OAuth', 'OpenID Connect',
+    'GraphQL', 'WebSocket', 'Firebase', 'Three.js', 'TensorFlow', 'PyTorch',
+    'OpenCV', 'Django REST Framework', 'Flask RESTful', 'Swagger', 'Postman',
+    'BeautifulSoup', 'Scrapy', 'Jupyter', 'Tableau', 'Power BI', 'Looker'
+];
+
+
+            skillsInput.addEventListener('input', (e) => {
+                const input = e.target.value.toLowerCase();
+                if (input.length > 0) {
+                    const filteredSkills = skills.filter(skill => skill.toLowerCase().includes(input));
+                    skillsDropdown.innerHTML = filteredSkills.map(skill => `<div>${skill}</div>`).join('');
+                    skillsDropdown.style.display = 'block';
+                } else {
+                    skillsDropdown.style.display = 'none';
+                }
+            });
+
+            skillsInput.addEventListener('blur', () => {
+                setTimeout(() => skillsDropdown.style.display = 'none', 200);
+            });
+
+            skillsDropdown.addEventListener('click', (e) => {
+                if (e.target.tagName === 'DIV') {
+                    const skill = e.target.innerText;
+                    if (!skillTags.includes(skill)) {
+                        skillTags.push(skill);
+                        updateSkillsContainer();
+                        skillsInput.value = '';
+                        skillsDropdown.style.display = 'none';
+                    }
+                }
+            });
+
+            skillsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-skill')) {
+                    const skillTag = e.target.parentElement.innerText.slice(0, -1);
+                    const index = skillTags.indexOf(skillTag);
+                    if (index > -1) {
+                        skillTags.splice(index, 1);
+                        updateSkillsContainer();
+                    }
+                }
+            });
+
+            function updateSkillsContainer() {
+                skillsContainer.innerHTML = skillTags.map(skill => `<span class="skill-tag">${skill}<span class="remove-skill">×</span></span>`).join('');
+                document.getElementById('skills').value = skillTags.join(', ');
+            }
+
+            // Initialize the skill tags
+            updateSkillsContainer();
+        });
+    </script>
+</body>
+</html>
