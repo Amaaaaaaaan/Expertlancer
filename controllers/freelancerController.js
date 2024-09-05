@@ -50,50 +50,60 @@ module.exports.registerFreelancerPageController = function (req, res) {
   res.render("register-freelancer");
 };
 
-// Handle the registration logic
+
+
 module.exports.registerFreelancer = async function (req, res) {
+  let { username, name, email, password, description, skills } = req.body;
   try {
-    const { username, name, email, password, description, skills } = req.body;
-
-    if (!username || !name || !email || !password || !description) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-
-    const existingFreelancer = await Freelancer.findOne({ email });
+    // Check if the freelancer already exists
+    let existingFreelancer = await Freelancer.findOne({ email });
     if (existingFreelancer) {
       return res.status(400).json({ message: "Email already in use" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Hash the password
+    let salt = await bcrypt.genSalt(10);
+    let hashedPassword = await bcrypt.hash(password, salt);
 
-    const freelancer = new Freelancer({
+    // Handle image upload
+    let imageUrl = "";
+    if (req.file) {
+      imageUrl = req.file.buffer.toString("base64"); // Convert image to Base64
+    }
+
+    // Create new freelancer
+    let freelancer = await Freelancer.create({
       username,
       name,
       email,
       password: hashedPassword,
       description,
-      skills
+      skills,
+      image: imageUrl, // Store Base64 image
     });
 
-    await freelancer.save();
-
-    const token = jwt.sign(
+    // Create JWT token
+    let token = jwt.sign(
       { id: freelancer._id, username: freelancer.username },
       process.env.JWT_KEY
     );
 
-    res.cookie('token', token, { httpOnly: true });
-    res.redirect('/freelancerhome'); // Redirect to freelancer home page after successful registration
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'An unexpected error occurred. Please try again later.' });
+    // Set token in cookies and redirect
+    res.cookie("token", token);
+    res.redirect("/freelancerhome");
+  } catch (err) {
+    if (!res.headersSent) {
+      return res.status(500).send(err.message);
+    }
   }
 };
 
 
+
 module.exports.homeafterloginController = async function (req, res, next) {
-  res.render('freelancerhome');
+    res.render('freelancerhome', { freelancer: req.freelancer });
 }
+
 module.exports.jobdisplayController = async function (req, res, next) {
   try {
     const jobs = await Job.find({}).select('-user'); // Retrieve jobs from database
@@ -197,3 +207,73 @@ module.exports.projectDetailsController = async function (req, res) {
     res.status(500).json({ message: 'An unexpected error occurred. Please try again later.' });
   }
 };
+
+
+
+module.exports.viewfreelancerprofileController = function(req, res) {
+  const freelancer = req.freelancer;
+  const image = freelancer.image ? `data:image/jpeg;base64,${freelancer.image}` : null;
+
+  res.render('freelancer-profile', { 
+    freelancer: { 
+      ...freelancer,
+      image: image, // Ensure this is included correctly
+      skills: freelancer.skills, 
+      name: freelancer.name,
+      username: freelancer.username,
+      description: freelancer.description,
+      portfolio: freelancer.portfolio,
+      location: freelancer.location,
+      experience: freelancer.experience,
+      projects: freelancer.projects
+    }
+  });
+};
+
+
+
+// Existing controller methods...
+
+module.exports.editProfilePageController = async (req, res) => {
+    try {
+        const freelancer = await Freelancer.findById(req.freelancer._id);
+        if (!freelancer) {
+            return res.status(404).json({ message: 'Freelancer not found' });
+        }
+        res.render('edit-profile', { freelancer });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'An unexpected error occurred. Please try again later.' });
+    }
+};
+
+module.exports.updateProfileController = async (req, res) => {
+    try {
+        const { username, name, email, description, skills } = req.body;
+        const image = req.file ? req.file.buffer.toString('base64') : null; // Handle image upload
+
+        const freelancer = await Freelancer.findByIdAndUpdate(
+            req.freelancer._id,
+            {
+                username,
+                name,
+                email,
+                description,
+                skills, // Convert skills to array
+            
+                image
+            },
+            { new: true } // Return the updated freelancer
+        );
+
+        if (!freelancer) {
+            return res.status(404).json({ message: 'Freelancer not found' });
+        }
+
+        res.redirect('/freelancer-profile');
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'An unexpected error occurred. Please try again later.' });
+    }
+};
+
