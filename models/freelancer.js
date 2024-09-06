@@ -30,6 +30,14 @@ const FreelancerSchema = new Schema({
         maxlength: [128, 'Password must be at most 128 characters long'],
         select: false
     },
+    specialization:{
+        type: String,
+        required: [true, 'Specialization is required'],
+        trim: true,
+        minlength: [1, 'Specialization must be at least 1 character long'],
+        maxlength: [50, 'Specialization must be at most 50 characters long']
+
+    },
     description: {
         type: String,
         required: [true, 'Description is required'],

@@ -9,25 +9,31 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
-      /* Custom Scrollbar */
-body::-webkit-scrollbar {
-    width: 10px; /* Slightly wider for a more prominent look */
-}
+        /* Custom Scrollbar */
+        body::-webkit-scrollbar {
+            width: 10px;
+            /* Slightly wider for a more prominent look */
+        }
 
-body::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #7e7e7e, #3e3e3e); /* Professional blue gradient */
-    border-radius: 8px; /* Slightly rounded corners */
-    border: 2px solid #f8f9fa; /* Light border to stand out */
-}
+        body::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #7e7e7e, #3e3e3e);
+            /* Professional blue gradient */
+            border-radius: 8px;
+            /* Slightly rounded corners */
+            border: 2px solid #f8f9fa;
+            /* Light border to stand out */
+        }
 
-body::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #0056b3, #003d80); /* Darker blue on hover */
-}
+        body::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #0056b3, #003d80);
+            /* Darker blue on hover */
+        }
 
-body::-webkit-scrollbar-track {
-    background: #f1f3f5; /* Light gray track background for a clean look */
-    border-radius: 8px;
-}
+        body::-webkit-scrollbar-track {
+            background: #f1f3f5;
+            /* Light gray track background for a clean look */
+            border-radius: 8px;
+        }
 
 
 
@@ -63,18 +69,19 @@ body::-webkit-scrollbar-track {
 
 <body class="bg-gray-50 text-gray-900">
 
-  <!-- Header -->
+    <!-- Header -->
 <header class="bg-gradient-to-r from-gray-900 to-gray-700 p-4 md:p-5 flex flex-col md:flex-row justify-between items-center shadow-lg">
+    
     <!-- Logo Section -->
-    <div class="flex justify-between items-center w-full md:w-auto">
+    <section class="flex justify-between items-center w-full md:w-auto">
         <a class="text-3xl font-bold text-white hover:text-teal-400 transition-colors duration-300 whitespace-nowrap" href="/">ExpertLancer</a>
         <button id="menu-toggle" class="md:hidden flex items-center text-white hover:text-teal-400">
             <i class="ri-menu-line text-2xl"></i>
         </button>
-    </div>
+    </section>
 
-    <!-- Centered Navigation Links -->
-    <nav class="w-full md:flex flex-1 md:justify-center mt-4 md:mt-0">
+    <!-- Navigation Links -->
+    <nav class="w-full md:flex ml-60 flex-1 md:justify-center mt-4 md:mt-0">
         <ul id="menu" class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 text-lg font-medium md:justify-center hidden md:flex">
             <li><a href="/" class="text-white hover:text-teal-400 flex items-center transition-colors duration-300"><i class="ri-home-line text-xl mr-2"></i>Home</a></li>
             <li><a href="/login-user" class="text-white hover:text-teal-400 flex items-center transition-colors duration-300"><i class="ri-user-search-line text-xl mr-2"></i>Find Freelancers</a></li>
@@ -83,13 +90,13 @@ body::-webkit-scrollbar-track {
     </nav>
 
     <!-- Log In/Sign Up Section -->
-    <div class="flex space-x-4 mt-4 md:mt-0">
+    <section class="flex space-x-4 mt-4 md:mt-0 items-center">
         <!-- Log In Dropdown -->
         <div class="relative group">
-            <button class="text-white bg-teal-500 hover:bg-teal-600 px-4 py-2 rounded-md flex items-center transition-colors duration-300 flex-shrink-0">
+            <button class="text-white bg-teal-500 hover:bg-teal-600 px-4 py-2 rounded-md flex items-center transition-colors duration-300">
                 Log In<i class="ri-arrow-down-s-line ml-2 text-sm"></i>
             </button>
-            <ul class="absolute left-0 w-48 hidden bg-gray-800 bg-opacity-90 text-gray-200 rounded-md shadow-lg transition-transform duration-300 transform group-hover:scale-100 group-focus-within:scale-100">
+            <ul class="absolute left-0 w-48 hidden bg-gray-800 text-gray-200 rounded-md shadow-lg transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
                 <li class="border-b border-gray-700">
                     <a href="/login-freelancer" class="block px-4 py-2 hover:bg-gray-700 transition-colors duration-300">Login as Freelancer</a>
                 </li>
@@ -101,10 +108,10 @@ body::-webkit-scrollbar-track {
 
         <!-- Sign Up Dropdown -->
         <div class="relative group">
-            <button class="text-white bg-teal-500 hover:bg-teal-600 mr-8 px-4 py-2 rounded-md flex items-center transition-colors duration-300 flex-shrink-0">
+            <button class="text-white bg-teal-500 hover:bg-teal-600 px-4 py-2 rounded-md flex items-center transition-colors duration-300">
                 Sign Up<i class="ri-arrow-down-s-line ml-2 text-sm"></i>
             </button>
-            <ul class="absolute left-0 w-48 hidden bg-gray-800 bg-opacity-90 text-gray-200 rounded-md shadow-lg transition-transform duration-300 transform group-hover:scale-100 group-focus-within:scale-100">
+            <ul class="absolute left-0 w-48 hidden bg-gray-800 text-gray-200 rounded-md shadow-lg transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
                 <li class="border-b border-gray-700">
                     <a href="/register-freelancer" class="block px-4 py-2 hover:bg-gray-700 transition-colors duration-300">Sign Up as Freelancer</a>
                 </li>
@@ -113,39 +120,50 @@ body::-webkit-scrollbar-track {
                 </li>
             </ul>
         </div>
-    </div>
+
+        <!-- 24/7 Doubt Support Button (hidden on mobile) -->
+        <a href="#" onclick="window.$crisp.push(['do', 'chat:open']); return false;" class="hidden md:flex text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md flex items-center transition-colors duration-300">
+            24/7 Doubt Support
+        </a>
+    </section>
 </header>
 
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 bg-gray-900 bg-opacity-90 z-50 hidden flex flex-col items-center">
-    <button id="mobile-menu-close" class="absolute top-4 right-40 text-white text-3xl">
-        &times;
-    </button>
-    <style>
-        .active-link {
-            color: teal !important;
-            border-bottom-color: teal !important;
-        }
-    </style>
-    
-    <ul class="flex flex-col items-center bg-gray-900 p-6 mt-16 space-y-4">
-        <li><a href="/" class="text-white hover:text-teal-400 text-xl border-b border-gray-600 pb-2 {{ route('home') ? 'active-link' : '' }}">Home</a></li>
-        <li><a href="/login-user" class="text-white hover:text-teal-400 text-xl border-b border-gray-600 pb-2 {{ route('find-freelancers') ? 'active-link' : '' }}">Find Freelancers</a></li>
-        <li><a href="/login-freelancer" class="text-white hover:text-teal-400 text-xl border-b border-gray-600 pb-2 {{ route('find-work') ? 'active-link' : '' }}">Find Work</a></li>
-    </ul>
-    
-    
-</div>
 
-<script>
-    // Mobile Menu Toggle
-    document.getElementById('menu-toggle').addEventListener('click', function () {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-    document.getElementById('mobile-menu-close').addEventListener('click', function () {
-        document.getElementById('mobile-menu').classList.add('hidden');
-    });
-</script>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-gray-900 bg-opacity-90 z-50 hidden flex flex-col items-center">
+        <button id="mobile-menu-close" class="absolute top-4 right-4 text-white text-3xl">
+            &times;
+        </button>
+        <style>
+            .active-link {
+                color: teal !important;
+                border-bottom-color: teal !important;
+            }
+        </style>
+
+        <ul class="flex flex-col items-center bg-gray-900 p-6 mt-16 space-y-4">
+            <li><a href="/"
+                    class="text-white hover:text-teal-400 text-xl border-b border-gray-600 pb-2 {{ route('home') ? 'active-link' : '' }}">Home</a>
+            </li>
+            <li><a href="/login-user"
+                    class="text-white hover:text-teal-400 text-xl border-b border-gray-600 pb-2 {{ route('find-freelancers') ? 'active-link' : '' }}">Find
+                    Freelancers</a></li>
+            <li><a href="/login-freelancer"
+                    class="text-white hover:text-teal-400 text-xl border-b border-gray-600 pb-2 {{ route('find-work') ? 'active-link' : '' }}">Find
+                    Work</a></li>
+        </ul>
+    </div>
+
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        document.getElementById('mobile-menu-close').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+    </script>
 
 
 
@@ -178,6 +196,7 @@ body::-webkit-scrollbar-track {
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-teal-800 mb-8">Explore Our Services</h2>
             <div class="flex flex-col lg:flex-row lg:justify-between">
+                <!-- Skill Gap Analyzer -->
                 <div class="lg:w-1/3 mb-8 lg:mb-0 px-4">
                     <div
                         class="bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
@@ -188,11 +207,12 @@ body::-webkit-scrollbar-track {
                                 <path d="M5 12h14M5 6h14M5 18h14"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold text-teal-800 mb-2">User-Friendly Interface</h3>
-                        <p class="text-gray-600">Enjoy a seamless experience with our intuitive and easy-to-navigate
-                            interface.</p>
+                        <h3 class="text-xl font-semibold text-teal-800 mb-2">Skill Gap Analyzer</h3>
+                        <p class="text-gray-600">Boost your skills and earnings with real-time analysis to stay
+                            competitive.</p>
                     </div>
                 </div>
+                <!-- Hybrid Project Teams -->
                 <div class="lg:w-1/3 mb-8 lg:mb-0 px-4">
                     <div
                         class="bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
@@ -203,11 +223,12 @@ body::-webkit-scrollbar-track {
                                 <path d="M20 21V6l-8-4-8 4v15"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold text-teal-800 mb-2">Flexible Customization</h3>
-                        <p class="text-gray-600">Tailor the platform to fit your specific needs with our extensive
-                            customization options.</p>
+                        <h3 class="text-xl font-semibold text-teal-800 mb-2">Hybrid Project Teams</h3>
+                        <p class="text-gray-600">Assemble custom teams to tackle complex projects seamlessly and
+                            efficiently.</p>
                     </div>
                 </div>
+                <!-- Real-Time Analytics -->
                 <div class="lg:w-1/3 px-4">
                     <div
                         class="bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
@@ -219,7 +240,7 @@ body::-webkit-scrollbar-track {
                             </svg>
                         </div>
                         <h3 class="text-xl font-semibold text-teal-800 mb-2">Real-Time Analytics</h3>
-                        <p class="text-gray-600">Get actionable insights with real-time data analytics to drive better
+                        <p class="text-gray-600">Gain actionable insights through real-time data analytics to enhance
                             decision-making.</p>
                     </div>
                 </div>
@@ -227,40 +248,48 @@ body::-webkit-scrollbar-track {
         </div>
     </section>
 
-     <!-- Feature Boxes Section -->
-     <section class="py-8 md:py-12 bg-gray-50 text-center">
+
+    <!-- Feature Boxes Section -->
+    <section class="py-8 md:py-12 bg-gray-50 text-center">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-teal-800 mb-8">Features</h2>
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 <div class="feature-box flex flex-col items-center bg-white p-4 rounded-lg shadow-lg">
-                    <img src="https://lh3.googleusercontent.com/nmgCUHpSE6cunNwji-P_eV1_Jh8Xp7asd-O_jtQU9MMrRwmMEgL2GoAXT1xHMgB4l2cIVFFGxejtV69j1UKnM9r7DQ=s120" alt="Create Account" class="mb-4">
-                    <h3 class="text-lg font-semibold text-teal-600 mb-2">Create Account</h3>
-                    <p class="text-sm text-gray-600">First you have to create an account here.</p>
+                    <img src="https://cdn.prod.website-files.com/5d99fb0b6e7b4802b40d8ac0/615da80116c36d5dd0abf1a1_skill%20gap%20analysis.png"
+                        alt="Create Account" class="mb-4">
+                    <h3 class="text-lg font-semibold text-teal-600 mb-2">Skill Gap Analyzer</h3>
+                    <p class="text-sm text-gray-600">Boost your skills and earnings with real-time analysis to stay
+                        competitive.</p>
                 </div>
                 <div class="feature-box flex flex-col items-center bg-white p-4 rounded-lg shadow-lg">
-                    <img src="https://cdn-icons-png.flaticon.com/512/10190/10190553.png" alt="Search Work" class="mb-4">
-                    <h3 class="text-lg font-semibold text-teal-600 mb-2">Search Work</h3>
-                    <p class="text-sm text-gray-600">Search the best freelance work here.</p>
+                    <img src="https://media.licdn.com/dms/image/D5612AQEgcYHxmNlN3g/article-cover_image-shrink_720_1280/0/1678699468706?e=2147483647&v=beta&t=j6u67iAq0Hv44n8by09rWCN6ILUL-tn8SJNnK01KEBE"
+                        alt="Search Work" class="mb-4">
+                    <h3 class="text-lg font-semibold text-teal-600 mb-2">Hybrid Project Teams</h3>
+                    <p class="text-sm text-gray-600">Team members can learn from each other’s expertise, leading to
+                        personal growth and the enhancement of team skills overall</p>
                 </div>
                 <div class="feature-box flex flex-col items-center bg-white p-4 rounded-lg shadow-lg">
-                    <img src="https://cdn-icons-png.flaticon.com/512/181/181506.png" alt="Search Freelancer" class="mb-4">
-                    <h3 class="text-lg font-semibold text-teal-600 mb-2">Search Freelancer</h3>
-                    <p class="text-sm text-gray-600">Search the best freelancer for your projects.</p>
+                    <img src="https://gruenderatelier.de/wp-content/uploads/2020/07/pricing2.png"
+                        alt="Search Freelancer" class="mb-4">
+                    <h3 class="text-lg font-semibold text-teal-600 mb-2">AI-Powered Pricing</h3>
+                    <p class="text-sm text-gray-600">Get real-time, AI-driven insights into your project’s value.</p>
                 </div>
                 <div class="feature-box flex flex-col items-center bg-white p-4 rounded-lg shadow-lg">
-                    <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Post Job" class="mb-4">
-                    <h3 class="text-lg font-semibold text-teal-600 mb-2">Post Job</h3>
-                    <p class="text-sm text-gray-600">Post a job opportunity for freelancers to apply.</p>
+                    <img src="https://www.bankofbaroda.in/-/media/project/bob/countrywebsites/india/blogs/images/vector/insurance-vector.jpg"
+                        alt="Post Job" class="mb-4">
+                    <h3 class="text-lg font-semibold text-teal-600 mb-2">Freelancer Insurance</h3>
+                    <p class="text-sm text-gray-600">Work stress-free with insured protection for your projects.</p>
                 </div>
                 <div class="feature-box flex flex-col items-center bg-white p-4 rounded-lg shadow-lg">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2750/2750870.png" alt="Freelancer Portfolio" class="mb-4">
-                    <h3 class="text-lg font-semibold text-teal-600 mb-2">Freelancer Portfolio</h3>
-                    <p class="text-sm text-gray-600">View detailed portfolios of top freelancers.</p>
+                    <img src="https://static.vecteezy.com/system/resources/previews/007/340/664/non_2x/customer-service-illustration-free-vector.jpg"
+                        alt="Freelancer Portfolio" class="mb-4">
+                    <h3 class="text-lg font-semibold text-teal-600 mb-2">24/7 Help Desk</h3>
+                    <p class="text-sm text-gray-600">Access AI and expert support anytime you need it.</p>
                 </div>
                 <div class="feature-box flex flex-col items-center bg-white p-4 rounded-lg shadow-lg">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077048.png" alt="User Dashboard" class="mb-4">
-                    <h3 class="text-lg font-semibold text-teal-600 mb-2">User Dashboard</h3>
-                    <p class="text-sm text-gray-600">Manage your profile and job applications easily.</p>
+                    <img src="https://thumbs.dreamstime.com/b/print-331505547.jpg" alt="User Dashboard" class="mb-4">
+                    <h3 class="text-lg font-semibold text-teal-600 mb-2">Localized Freelancing</h3>
+                    <p class="text-sm text-gray-600">Connect with your local community, breaking language barriers.</p>
                 </div>
             </div>
         </div>
@@ -288,7 +317,7 @@ body::-webkit-scrollbar-track {
     </script>
 
 
-<!-- Footer -->
+    <!-- Footer -->
 <footer class="bg-gray-900 text-gray-300 py-12">
     <div class="container mx-auto px-6">
 
@@ -296,28 +325,34 @@ body::-webkit-scrollbar-track {
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
                 <!-- Company Description -->
-                <div class="w-full md:w-1/4">
+                <div class="w-full md:w-1/3">
                     <h5 class="text-3xl font-bold mb-4 text-white">ExpertLancer</h5>
                     <p class="mb-4 text-gray-400 leading-relaxed">
-                        ExpertLancer connects top-tier freelancers with innovative companies. Our platform offers a seamless experience to find and manage freelance projects, enhancing productivity and creating opportunities for talent worldwide.
+                        ExpertLancer connects top-tier freelancers with innovative companies. Our platform offers a
+                        seamless experience to find and manage freelance projects, enhancing productivity and
+                        creating opportunities for talent worldwide.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Facebook">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Facebook">
                             <i class="ri-facebook-line text-2xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Twitter">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Twitter">
                             <i class="ri-twitter-line text-2xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="LinkedIn">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="LinkedIn">
                             <i class="ri-linkedin-line text-2xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Instagram">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Instagram">
                             <i class="ri-instagram-line text-2xl"></i>
                         </a>
                     </div>
                 </div>
                 <!-- Contact Information -->
-                <div class="w-full ml-40 md:w-1/3">
+                <div class="w-full md:w-1/3">
                     <h5 class="text-lg font-semibold mb-4 text-white">Contact Us</h5>
                     <ul class="space-y-2">
                         <li class="text-gray-400">
@@ -330,17 +365,21 @@ body::-webkit-scrollbar-track {
                         </li>
                         <li class="text-gray-400">
                             <i class="ri-map-pin-line mr-2"></i>
-                            123 Freelancer Ave, Suite 456, City, Country
+                            123 Suite 456, City, Country
                         </li>
                     </ul>
                 </div>
                 <!-- Newsletter Signup -->
                 <div class="w-full md:w-1/3">
                     <h5 class="text-lg font-semibold mb-4 text-white">Stay Updated</h5>
-                    <p class="mb-4 text-gray-400">Subscribe to our newsletter for the latest updates, job opportunities, and tips on maximizing your freelance career.</p>
+                    <p class="mb-4 text-gray-400">Subscribe to our newsletter for the latest updates, job
+                        opportunities, and tips on maximizing your freelance career.</p>
                     <form action="#" method="post" class="flex flex-col space-y-4">
-                        <input type="email" placeholder="Enter your email" class="p-3 rounded-md border border-gray-700 bg-gray-800 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition-colors duration-300">Subscribe</button>
+                        <input type="email" placeholder="Enter your email"
+                            class="p-3 rounded-md border border-gray-700 bg-gray-800 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                        <button type="submit"
+                            class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition-colors duration-300">Subscribe</button>
                     </form>
                 </div>
             </div>
@@ -353,8 +392,8 @@ body::-webkit-scrollbar-track {
                 <h5 class="text-lg font-semibold mb-4 text-white">Quick Links</h5>
                 <ul class="space-y-2">
                     <li><a href="/" class="text-gray-400 hover:text-white">Home</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white">Find Work</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white">Find Freelancers</a></li>
+                    <li><a href="/login-freelancer" class="text-gray-400 hover:text-white">Find Work</a></li>
+                    <li><a href="/login-user" class="text-gray-400 hover:text-white">Find Freelancers</a></li>
                     <li><a href="/login-user" class="text-gray-400 hover:text-white">Log In</a></li>
                     <li><a href="/register-user" class="text-gray-400 hover:text-white">Sign Up</a></li>
                 </ul>
@@ -370,7 +409,7 @@ body::-webkit-scrollbar-track {
                 </ul>
             </div>
             <!-- Legal Section -->
-            <div class="w-full md:w-1/4">
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
                 <h5 class="text-lg font-semibold mb-4 text-white">Legal</h5>
                 <ul class="space-y-2">
                     <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
@@ -398,7 +437,8 @@ body::-webkit-scrollbar-track {
 </footer>
 
 
-    
+
+
     <script
         type="text/javascript">window.$crisp = []; window.CRISP_WEBSITE_ID = "2d25c9a8-52e4-47ec-a2bc-0375cb39fb1e"; (function () { d = document; s = d.createElement("script"); s.src = "https://client.crisp.chat/l.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })();</script>
 
@@ -432,15 +472,15 @@ body::-webkit-scrollbar-track {
         });
 
 
-      
 
-        
+
+
     </script>
-    
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
-    
+
 </body>
 
 </html>

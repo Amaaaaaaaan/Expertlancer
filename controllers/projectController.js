@@ -3,6 +3,8 @@
     const upload = require('../config/multer-config');
     const userModel = require("../models/User");
     const projectModel = require("../models/Project");
+    
+    const Freelancer = require("../models/freelancer");
     const bcrypt = require("bcrypt");
     const multer = require('multer');
 
@@ -26,7 +28,7 @@
             }
     
             // Validate required fields
-            const { title, description, category } = req.body;
+            const { title, description, category, assignedTo } = req.body;
             if (!title || !description) {
                 return res.status(400).send('Title and description are required.');
             }
@@ -48,7 +50,8 @@
                 description,
                 pdf: req.file.buffer.toString("base64"), // Storing the PDF as a Base64 string
                 user: user._id,
-                category // Add the category field
+                category, // Add the category field
+                assignedTo: assignedTo || null // Add the assignedTo field, default to null if not provided
             });
     
             await newProject.save();
@@ -65,6 +68,7 @@
             res.status(500).send('Error uploading project: ' + error.message);
         }
     };
+    
     
 
     module.exports.viewProjectController = async (req, res) => {
@@ -90,7 +94,6 @@
             res.status(500).send("Server Error");
         }
     };
-
     exports.editProjectController = async (req, res) => {
         try {
             const { id } = req.params;
@@ -98,34 +101,40 @@
             if (!project) {
                 return res.status(404).send("Project not found");
             }
-            res.render("editProject", { project });
+    
+            // Fetch all freelancers
+            const freelancers = await Freelancer.find({}).select('name');
+    
+            // Render the edit project page with project data and freelancers list
+            res.render('editProject', { project, freelancers });
         } catch (error) {
             console.error(error);
             res.status(500).send("Server Error");
         }
     };
     
-
     exports.updateProjectController = async (req, res) => {
         try {
             const { id } = req.params;
-            const { title, description, category } = req.body;
+            const { title, description, category, assignedTo } = req.body;
+    
+            // Prepare data to update
             const updateData = {
                 title,
                 description,
                 category,
+                assignedTo: assignedTo || null, // Store name as string
             };
     
             // Check if a new PDF file is uploaded
             if (req.file) {
-                // Validate the file size if necessary
                 if (req.file.size > 5 * 1024 * 1024) { // 5 MB limit
                     return res.status(400).send('File size exceeds the 5 MB limit.');
                 }
-                // Add the PDF data to updateData
                 updateData.pdf = req.file.buffer.toString("base64");
             }
     
+            // Update the project
             const project = await Project.findByIdAndUpdate(id, updateData, { new: true });
             if (!project) {
                 return res.status(404).send("Project not found");
@@ -137,4 +146,6 @@
             res.status(500).send("Server Error");
         }
     };
+    
+    
     

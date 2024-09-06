@@ -42,7 +42,7 @@
     <!-- Mobile Menu -->
     <div class="md:hidden fixed inset-0 bg-white shadow-md z-50 hidden" id="mobile-menu">
         <nav class="flex flex-col items-center p-4">
-            <a href="/profile" class="text-blue-600 hover:text-blue-800 flex items-center gap-1 py-2" aria-label="Profile">
+            <a href="/freelancer-profile" class="text-blue-600 hover:text-blue-800 flex items-center gap-1 py-2" aria-label="Profile">
                 <i class="ri-user-line text-xl"></i>
                 <span>Profile</span>
             </a>
@@ -64,9 +64,10 @@
                 <!-- Filters -->
                 <select id="category-filter" class="border border-gray-300 rounded px-4 py-2 w-full md:w-1/3 focus:outline-none focus:border-blue-500">
                     <option value="">All Categories</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="app-development">App Development</option>
-                    <option value="graphic-design">Graphic Design</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Mobile Development">Mobile Development</option>
+                    <option value="Android Development">Android Development</option>
+                    <option value="Others">Others</option>
                 </select>
                 <button id="search-button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full md:w-1/6">
                     Search
@@ -79,21 +80,26 @@
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Available Projects</h2>
             <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <% projects.forEach(project => { %>
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2"><%= project.title %></h3>
-                        <p class="text-gray-700 mb-2">Posted by: <%= project.user ? project.user.username : 'Unknown' %></p>
-                        <p class="text-gray-600 mb-4">Category: <%= project.category %></p>
-                        <div class="text-center mt-4">
-                            <a href="/project/<%= project._id %>" class="text-blue-500 hover:text-blue-700 text-sm font-medium flex items-center justify-center">
-                                <i class="ri-eye-line mr-1 text-blue-500"></i> View Details
-                            </a>
+                    <% if (!project.assignedTo) { %>
+                        <div class="project-item bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                             data-title="<%= project.title %>"
+                             data-category="<%= project.category %>">
+                            <h3 class="project-title text-xl font-semibold text-gray-900 mb-2"><%= project.title %></h3>
+                            <p class="text-gray-700 mb-2">Posted by: <%= project.user ? project.user.username : 'Unknown' %></p>
+                            <p class="project-category text-gray-600 mb-4">Category: <%= project.category %></p>
+                            <div class="text-center mt-4">
+                                <a href="/project/<%= project._id %>" class="text-blue-500 hover:text-blue-700 text-sm font-medium flex items-center justify-center">
+                                    <i class="ri-eye-line mr-1 text-blue-500"></i> View Details
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    <% } %>
                 <% }); %>
             </div>
         </section>
     </main>
 
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -102,6 +108,44 @@
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
+
+            // Search and filter functionality
+            const searchInput = document.getElementById('search');
+            const categoryFilter = document.getElementById('category-filter');
+            const searchButton = document.getElementById('search-button');
+            const projectItems = document.querySelectorAll('.project-item');
+
+            const filterProjects = () => {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                const selectedCategory = categoryFilter.value;
+
+                projectItems.forEach(item => {
+                    const title = item.getAttribute('data-title').toLowerCase();
+                    const category = item.getAttribute('data-category');
+
+                    const matchesSearch = title.includes(searchTerm) || searchTerm === '';
+                    const matchesCategory = category === selectedCategory || selectedCategory === '';
+
+                    if (matchesSearch && matchesCategory) {
+                        item.style.display = ''; // Show item
+                    } else {
+                        item.style.display = 'none'; // Hide item
+                    }
+                });
+            };
+
+            // Event listener for search button
+            searchButton.addEventListener('click', filterProjects);
+
+            // Event listener for pressing Enter in search input
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    filterProjects();
+                }
+            });
+
+            // Event listener for category filter change
+            categoryFilter.addEventListener('change', filterProjects);
         });
     </script>
 </body>

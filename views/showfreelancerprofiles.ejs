@@ -1,140 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Login</title>
-    <style>
-        body {
-            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-        }
-        .header {
-            background-color: #1a202c; /* Darker background for the header */
-            color: #edf2f7; /* Light text color */
-        }
-        .form-input-wrapper {
-            position: relative;
-        }
-        .form-input {
-            padding-left: 3rem; /* Space for the icon */
-            border-color: #cbd5e0; /* Light border color */
-            placeholder-color: #a0aec0; /* Light placeholder color */
-        }
-        .form-input:focus {
-            border-color: #3182ce; /* Blue border color on focus */
-            box-shadow: 0 0 0 2px rgba(49, 140, 231, 0.2); /* Blue shadow on focus */
-        }
-        .form-input-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #a0aec0;
-        }
-        .submit-btn {
-            background-color: #2b6cb0; /* Darker blue for the button */
-            hover:bg-color: #2b6cb0; /* Darker blue on hover */
-        }
-        .new-user-link {
-            color: #63b3ed; /* Blue color for new user link */
-            text-decoration: underline; /* Underline on hover */
-        }
-        .error-message {
-           
-            color: #e53e3e; /* Red color for error messages */
-        }
-        .header-button {
-            background-color: #2b6cb0; /* Darker blue for the button */
-            color: white; /* White text color */
-            padding: 0.5rem 1rem; /* Padding for the button */
-            border-radius: 0.25rem; /* Rounded corners */
-            text-decoration: none; /* Remove underline from the link */
-            font-weight: 600; /* Bold text */
-            transition: background-color 0.3s ease; /* Smooth background color transition */
-        }
-        .header-button:hover {
-            background-color: #2b6cb0; /* Darker blue on hover */
-        }
-        .home-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background-color: #ffffff;
-            color: rgb(0, 0, 0);
-            padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
-        .home-button:hover {
-            color: #0029f7;
-        }
-        .home-button i {
-            margin-right: 0.5rem;
-        }
-    </style>
+    <title>Freelancer Profiles</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-
-<body class="flex flex-col min-h-screen ">
-     <!-- Navigation Bar -->
-     <div class="relative">
-        <a href="/" class="home-button absolute top-4 right-6 flex items-center">
-            <i class="ri-home-line text-xl"></i> Home
-        </a>
-        <div class="flex justify-between items-center bg-white p-6 shadow-md">
-            <a class="text-2xl font-bold text-blue-600 whitespace-nowrap" href="/freelancerhome">ExpertLancer</a>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="flex flex-1 items-center justify-center p-6">
-        <div class="w-full max-w-md bg-white p-10 rounded-xl shadow-lg flex flex-col gap-8">
-            <!-- Header -->
-            <div class="header py-5 px-7 rounded-lg text-center text-2xl font-semibold tracking-wide shadow-md">
-                <h1>ExpertLancer - Client Login</h1>
-            </div>
-
-            <!-- Login Section -->
-            <div>
-                <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">Login</h3>
-                <form action="/login-user" method="post" class="flex flex-col gap-6">
-                    <div class="form-input-wrapper">
-                        
-                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300" 
-                               type="text" 
-                               placeholder="Email address" 
-                               name="email" 
-                               required>
+<body>
+    <header class="bg-gray-800 text-white p-4 text-center">
+        <h1 class="text-3xl font-bold">Freelancer Profiles</h1>
+    </header>
+    <main class="p-8">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% freelancers.forEach(freelancer => { %>
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                       
+                            <img src="<%= freelancer.image %>" alt="No picture found" class="w-32 h-32 rounded-full mx-auto mb-4">
+                    
+                        <h2 class="text-2xl font-bold mb-2"><%= freelancer.name %></h2>
+                        <p class="text-gray-700 mb-2"><strong>Username:</strong> <%= freelancer.username %></p>
+                        <p class="text-gray-700 mb-2"><strong>Email:</strong> <%= freelancer.email %></p>
+                        <p class="text-gray-700 mb-2"><strong>Specialization:</strong> <%= freelancer.specialization %></p>
+                        <p class="text-gray-700 mb-2"><strong>Description:</strong> <%= freelancer.description %></p>
+                        <% if (freelancer.skills.length > 0) { %>
+                            <p class="text-gray-700 mb-2"><strong>Skills:</strong> <%= freelancer.skills.join(', ') %></p>
+                        <% } %>
+                        <% if (freelancer.portfolio.length > 0) { %>
+                            <p class="text-gray-700 mb-2"><strong>Portfolio:</strong></p>
+                            <ul class="list-disc list-inside pl-5">
+                                <% freelancer.portfolio.forEach(item => { %>
+                                    <li><a href="<%= item %>" class="text-blue-600 hover:underline" target="_blank"><%= item %></a></li>
+                                <% }); %>
+                            </ul>
+                        <% } %>
+                        <!-- Contact Button -->
+                        <div class="mt-4">
+                            <a href="mailto:<%= freelancer.email %>" class="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Contact Freelancer</a>
+                        </div>
                     </div>
-                    <div class="form-input-wrapper">
-                        
-                        <input class="form-input block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none transition-transform ease-in-out duration-300" 
-                               type="password" 
-                               placeholder="Password" 
-                               name="password" 
-                               required>
-                    </div>
-                    <button type="submit" class="submit-btn w-full py-3 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 focus:outline-none transition-transform ease-in-out duration-300">
-                        Login
-                    </button>
-                </form>
-                <div id="error-message" class="error-message mt-4 hidden text-center font-semibold"></div>
-            </div>
-
-            <!-- New User Registration Link -->
-            <div class="text-center mt-4">
-                <p class="text-gray-600">New to ExpertLancer?</p>
-                <a href="/register-user" class="new-user-link font-semibold">Create an account</a>
+                <% }); %>
             </div>
         </div>
-    </div>
-<!-- Footer -->
+    </main>
+    <!-- Footer -->
 <footer class="bg-gray-900 text-gray-300 py-12">
     <div class="container mx-auto px-6">
 
@@ -253,19 +162,5 @@
     </div>
 </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const errorMessageElement = document.getElementById('error-message');
-
-            // Display server-side errors if available
-            const urlParams = new URLSearchParams(window.location.search);
-            const error = urlParams.get('error');
-            if (error) {
-                errorMessageElement.textContent = error;
-                errorMessageElement.classList.remove('hidden');
-            }
-        });
-    </script>
 </body>
-
 </html>
