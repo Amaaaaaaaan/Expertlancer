@@ -17,7 +17,11 @@ const {
     projectDetailsController,
     viewfreelancerprofileController,
     editProfilePageController, // New route handler
-    updateProfileController    // New route handler
+    updateProfileController,
+    skillgapController,
+    getinsuranceController,
+    assignedprojectsController,
+    legalsupportController
 } = require('../controllers/freelancerController');
 
 const {
@@ -59,5 +63,12 @@ router.post('/apply/:id', isFreelancerLoggedIn, upload.single('resume'), submitA
 // Project display routes
 router.get('/projectdisplay', isFreelancerLoggedIn, projectdisplayController);
 router.get('/project/:id', isFreelancerLoggedIn, projectDetailsController);
+
+router.get('/skillgap', isFreelancerLoggedIn, skillgapController);
+router.get('/get-insurance', isFreelancerLoggedIn,getinsuranceController);
+
+router.get('/assigned-projects', isFreelancerLoggedIn,assignedprojectsController)
+
+router.get('/legaladvice',legalsupportController)
 
 module.exports = router;

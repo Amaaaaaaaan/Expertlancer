@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="font-poppins bg-gray-100 text-gray-800 p-4">
+    <header class="bg-white shadow-md py-4 px-6 mb-8">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo (Left Side) -->
+            <a class="text-2xl font-bold text-blue-600" href="/freelancerhome">ExpertLancer</a>
+
+            <!-- Desktop Menu (Right Side) -->
+            <nav class="hidden md:flex md:items-center md:gap-4">
+                <a href="/freelancer-profile" class="text-blue-600 hover:text-blue-800 flex items-center gap-1" aria-label="Profile">
+                    <i class="ri-user-line text-xl"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="/freelancerhome" class="text-blue-600 hover:text-blue-800 flex items-center gap-1" aria-label="Home">
+                    <i class="ri-home-line text-xl"></i>
+                    <span>Home</span>
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-blue-600 hover:text-blue-800" id="mobile-menu-button" aria-label="Toggle menu">
+                <i class="ri-menu-line text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-8 text-center">ExpertLancer Insurance Form</h1>
+        <form>
+            <!-- Personal Information -->
+            <fieldset class="border border-gray-300 rounded-lg p-6 mb-6">
+                <legend class="text-xl font-semibold text-blue-600 mb-4">Personal Information</legend>
+                <div class="space-y-4">
+                    <div>
+                        <label for="fullname" class="block text-gray-700 text-sm font-medium mb-2">Full Name:</label>
+                        <input type="text" id="fullname" name="fullname" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <div>
+                        <label for="dob" class="block text-gray-700 text-sm font-medium mb-2">Date of Birth:</label>
+                        <input type="date" id="dob" name="dob" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-medium mb-2">Gender:</label>
+                        <div class="flex gap-4">
+                            <div class="flex items-center">
+                                <input type="radio" id="male" name="gender" value="male" required class="mr-2">
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="female" name="gender" value="female" class="mr-2">
+                                <label for="female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-gray-700 text-sm font-medium mb-2">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Employment Information -->
+            <fieldset class="border border-gray-300 rounded-lg p-6 mb-6">
+                <legend class="text-xl font-semibold text-blue-600 mb-4">Employment Information</legend>
+                <div class="space-y-4">
+                    <div>
+                        <label for="occupation" class="block text-gray-700 text-sm font-medium mb-2">Project I'd:</label>
+                        <input type="text" id="occupation" name="occupation" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <div>
+                        <label for="work_address" class="block text-gray-700 text-sm font-medium mb-2">Work Address:</label>
+                        <input type="text" id="work_address" name="work_address" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email Address (Work):</label>
+                        <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Insurance Coverage Details -->
+            <fieldset class="border border-gray-300 rounded-lg p-6 mb-6">
+                <legend class="text-xl font-semibold text-blue-600 mb-4">Insurance Coverage Details</legend>
+                <div class="space-y-4">
+                    <div>
+                        <label for="insurance_type" class="block text-gray-700 text-sm font-medium mb-2">Type of Insurance:</label>
+                        <div class="flex gap-4">
+                            <div class="flex items-center">
+                                <input type="radio" id="term_life" name="insurance_type" value="term" required class="mr-2">
+                                <label for="term_life">Individual Project</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="whole_life" name="insurance_type" value="whole" class="mr-2">
+                                <label for="whole_life">Section of project</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="universal_life" name="insurance_type" value="universal" class="mr-2">
+                                <label for="universal_life">All Projects</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="coverage_amount" class="block text-gray-700 text-sm font-medium mb-2">Project Value:</label>
+                        <input type="number" id="coverage_amount" name="coverage_amount" required class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <div>
+                        <label for="payment" class="block text-gray-700 text-sm font-medium mb-2">Premium Payment:</label>
+                        <div class="flex gap-4">
+                            <div class="flex items-center">
+                                <input type="radio" id="monthly" name="payment" value="monthly" required class="mr-2">
+                                <label for="monthly">One Time</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="quarterly" name="payment" value="quarterly" class="mr-2">
+                                <label for="quarterly">Monthly</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="annually" name="payment" value="annually" class="mr-2">
+                                <label for="annually">Annually</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="additional_riders" class="block text-gray-700 text-sm font-medium mb-2">Additional Costs (if any):</label>
+                        <input type="text" id="additional_riders" name="additional_riders" class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Declaration -->
+            <fieldset class="border border-gray-300 rounded-lg p-6 mb-6">
+                <legend class="text-xl font-semibold text-blue-600 mb-4">Declaration</legend>
+                <div class="flex items-center gap-2 mb-4">
+                    <input type="checkbox" id="declaration" name="declaration" required class="mr-2">
+                    <label for="declaration" class="text-gray-700 text-sm">I declare that the information provided above is correct to the best of my knowledge.</label>
+                </div>
+            </fieldset>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav id="mobile-menu" class="fixed top-0 right-0 w-64 bg-white shadow-md md:hidden hidden">
+        <div class="flex justify-between p-4 border-b">
+            <h2 class="text-xl font-bold text-blue-600">Menu</h2>
+            <button id="close-menu" class="text-blue-600 hover:text-blue-800">
+                <i class="ri-close-line text-xl"></i>
+            </button>
+        </div>
+        <ul class="p-4 space-y-4">
+            <li><a href="/freelancer-profile" class="text-blue-600 hover:text-blue-800 flex items-center gap-1" aria-label="Profile"><i class="ri-user-line text-xl"></i> Profile</a></li>
+            <li><a href="/freelancerhome" class="text-blue-600 hover:text-blue-800 flex items-center gap-1" aria-label="Home"><i class="ri-home-line text-xl"></i> Home</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        document.getElementById('close-menu').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+    </script>
+    <!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="container mx-auto px-6">
+
+        <!-- Company Info Section -->
+        <div class="mb-12">
+            <div class="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
+                <!-- Company Description -->
+                <div class="w-full md:w-1/3">
+                    <h5 class="text-3xl font-bold mb-4 text-white">ExpertLancer</h5>
+                    <p class="mb-4 text-gray-400 leading-relaxed">
+                        ExpertLancer connects top-tier freelancers with innovative companies. Our platform offers a
+                        seamless experience to find and manage freelance projects, enhancing productivity and
+                        creating opportunities for talent worldwide.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Facebook">
+                            <i class="ri-facebook-line text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Twitter">
+                            <i class="ri-twitter-line text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="LinkedIn">
+                            <i class="ri-linkedin-line text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Instagram">
+                            <i class="ri-instagram-line text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Contact Information -->
+                <div class="w-full md:w-1/3">
+                    <h5 class="text-lg font-semibold mb-4 text-white">Contact Us</h5>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400">
+                            <i class="ri-mail-line mr-2"></i>
+                            <a href="mailto:info@expertlancer.com" class="hover:text-white">info@expertlancer.com</a>
+                        </li>
+                        <li class="text-gray-400">
+                            <i class="ri-phone-line mr-2"></i>
+                            <a href="tel:+123456789" class="hover:text-white">+1 (234) 567-89</a>
+                        </li>
+                        <li class="text-gray-400">
+                            <i class="ri-map-pin-line mr-2"></i>
+                            123 Suite 456, City, Country
+                        </li>
+                    </ul>
+                </div>
+                <!-- Newsletter Signup -->
+                <div class="w-full md:w-1/3">
+                    <h5 class="text-lg font-semibold mb-4 text-white">Stay Updated</h5>
+                    <p class="mb-4 text-gray-400">Subscribe to our newsletter for the latest updates, job
+                        opportunities, and tips on maximizing your freelance career.</p>
+                    <form action="#" method="post" class="flex flex-col space-y-4">
+                        <input type="email" placeholder="Enter your email"
+                            class="p-3 rounded-md border border-gray-700 bg-gray-800 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                        <button type="submit"
+                            class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition-colors duration-300">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Sections -->
+        <div class="flex flex-col md:flex-row justify-between mb-12">
+            <!-- Quick Links Section -->
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h5 class="text-lg font-semibold mb-4 text-white">Quick Links</h5>
+                <ul class="space-y-2">
+                    <li><a href="/" class="text-gray-400 hover:text-white">Home</a></li>
+                    <li><a href="/login-freelancer" class="text-gray-400 hover:text-white">Find Work</a></li>
+                    <li><a href="/login-user" class="text-gray-400 hover:text-white">Find Freelancers</a></li>
+                    <li><a href="/login-user" class="text-gray-400 hover:text-white">Log In</a></li>
+                    <li><a href="/register-user" class="text-gray-400 hover:text-white">Sign Up</a></li>
+                </ul>
+            </div>
+            <!-- Resources Section -->
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h5 class="text-lg font-semibold mb-4 text-white">Resources</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Community</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">API Documentation</a></li>
+                </ul>
+            </div>
+            <!-- Legal Section -->
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h5 class="text-lg font-semibold mb-4 text-white">Legal</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <!-- Features Section -->
+            <div class="w-full md:w-1/4">
+                <h5 class="text-lg font-semibold mb-4 text-white">Features</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Advanced Search</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Project Management</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Secure Payments</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">24/7 Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="text-center border-t border-gray-700 pt-6">
+            <p class="text-gray-500">&copy; 2024 ExpertLancer. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

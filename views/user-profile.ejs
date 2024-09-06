@@ -12,18 +12,36 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        body::-webkit-scrollbar {
+    width: 10px; /* Slightly wider for a more prominent look */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #7e7e7e, #3e3e3e); /* Professional blue gradient */
+    border-radius: 8px; /* Slightly rounded corners */
+    border: 2px solid #f8f9fa; /* Light border to stand out */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0056b3, #003d80); /* Darker blue on hover */
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f3f5; /* Light gray track background for a clean look */
+    border-radius: 8px;
+}
 
         .card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             background-color: #ffffff;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
 
         .title {
@@ -35,50 +53,16 @@
 
         .projects-section,
         .jobs-section {
-            background: #f3f4f6;
+            background: #ffffff;
             border-radius: 12px;
             padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .section-header {
-            background: #2d3748;
-            color: white;
-            padding: 14px 20px;
-            border-radius: 8px;
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-        }
 
-        .btn {
-            transition: all 0.2s ease;
-            padding: 0.5rem 1.25rem;
-            border-radius: 8px;
-            font-weight: 500;
-        }
+        
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .text-blue-500:hover {
-            color: #2b6cb0;
-        }
-
-        .text-yellow-500:hover {
-            color: #d69e2e;
-        }
-
-        .text-red-500:hover {
-            color: #c53030;
-        }
-
-        .section-content {
-            gap: 1.5rem;
-        }
+        
 
         @media (max-width: 768px) {
             .lg\:flex-row {
@@ -93,80 +77,89 @@
 </head>
 
 <body class="bg-gray-50 text-gray-900 min-h-screen">
-    <!-- Header -->
-    <header class="bg-white p-4 md:p-5 flex justify-between items-center shadow">
-        <a class="text-2xl font-bold text-blue-700" href="/">ExpertLancer</a>
-        <div class="flex flex-wrap lg:space-x-4 items-center">
+    <header class="bg-white p-4 md:p-6 flex justify-between items-center shadow-md border-b border-gray-200">
+        <a href="/" class="text-3xl font-bold text-blue-800 hover:text-blue-900">
+            ExpertLancer
+        </a>
+        <nav class="flex space-x-4 items-center">
             <a href="/project/upload"
-                class="bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-blue-800 shadow flex items-center btn mb-2 lg:mb-0">
-                <i class="ri-upload-line mr-2"></i> Upload Your Project
+                class="bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-blue-800 shadow-md flex items-center transition-transform transform hover:translate-y-[-2px] hover:shadow-lg">
+                <i class="ri-upload-line mr-2"></i> Upload Project
             </a>
             <a href="/job/upload"
-                class="bg-purple-700 text-white py-2 px-4 rounded-lg hover:bg-purple-800 shadow flex items-center btn mb-2 lg:mb-0">
-                <i class="ri-briefcase-line mr-2"></i> Upload Job Opening
+                class="bg-purple-700 text-white py-2 px-4 rounded-lg hover:bg-purple-800 shadow-md flex items-center transition-transform transform hover:translate-y-[-2px] hover:shadow-lg">
+                <i class="ri-briefcase-line mr-2"></i> Upload Job
             </a>
-            <a href="/userhome" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 shadow flex items-center btn mb-2 lg:mb-0">
+            <a href="/userhome"
+                class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 shadow-md flex items-center transition-transform transform hover:translate-y-[-2px] hover:shadow-lg">
                 <i class="ri-home-line mr-2"></i> Home
             </a>
             <a href="/logout"
-                class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 shadow flex items-center btn">
+                class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 shadow-md flex items-center transition-transform transform hover:translate-y-[-2px] hover:shadow-lg">
                 <i class="ri-logout-box-line mr-2"></i> Logout
             </a>
-        </div>
+        </nav>
     </header>
+
 
     <!-- Profile Section -->
     <div class="container mx-auto p-8">
-        <div class="flex flex-col lg:flex-row lg:justify-between mb-8">
+        <div class="flex flex-col lg:flex-row lg:justify-between mb-8 items-center">
             <div class="flex items-start mb-4 lg:mb-0">
-                <img class="h-24 w-24 rounded-full object-cover border-4 border-blue-500 shadow-lg"
+                <img class="h-32 w-32 rounded-full object-cover border-4 border-blue-500 shadow-lg"
                     src="data:image/png;base64,<%= user.image %>" alt="Profile Image">
-                <h1 class="text-3xl font-extrabold text-gray-900 ml-4">Hey, <%= user.username %> 👋🏻</h1>
+                <h1 class="text-4xl font-extrabold text-gray-900 ml-6">Hey, <%= user.username %> 👋🏻</h1>
             </div>
         </div>
 
         <!-- Flex Container for Equal Sections -->
         <div class="flex flex-col lg:flex-row lg:space-x-8">
-            <!-- Projects Section -->
-            <section class="w-full lg:w-1/2 projects-section">
-                <div class="section-header">Your Projects</div>
-                <% if (user.projects.length > 0) { %>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 section-content">
-                    <% user.projects.forEach((project) => { %>
-                    <div class="card">
-                        <h3 class="title">
-                            <%= project.title %>
-                        </h3>
-                        <div class="text-center flex justify-around mt-4">
-                            <a href="/project/view/<%= project._id %>"
-                                class="text-blue-500 hover:text-blue-700 text-sm font-medium flex items-center">
-                                <i class="ri-eye-line mr-1 text-blue-500"></i> View
-                            </a>
-                            <a href="/project/edit/<%= project._id %>"
-                                class="text-yellow-500 hover:text-yellow-700 text-sm font-medium flex items-center">
-                                <i class="ri-edit-line mr-1 text-yellow-500"></i> Edit
-                            </a>
-                            <form action="/project/delete/<%= project._id %>" method="POST"
-                                onsubmit="return confirm('Are you sure you want to delete this project?');">
-                                <button type="submit"
-                                    class="text-red-500 hover:text-red-700 text-sm font-medium flex items-center">
-                                    <i class="ri-delete-bin-line mr-1 text-red-500"></i> Delete
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <% }) %>
-                </div>
-                <% } else { %>
-                <p class="text-gray-600 text-sm">No projects available. Please upload a new project.</p>
-                <% } %>
-            </section>
+           <!-- Projects Section -->
+<section class="w-full lg:w-1/2 projects-section">
+    <div class="section-header">Your Projects</div>
+    <% if (user.projects.length > 0) { %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 section-content">
+        <% user.projects.forEach((project) => { %>
+        <div class="card">
+            <h3 class="title">
+                <%= project.title %>
+            </h3>
+            <p class="assigned-to text-gray-500 text-sm mt-2">
+                Assigned To: <%= project.assignedTo || 'Unassigned' %>
+            </p>
+            <div class="text-center flex justify-around mt-4">
+                <a href="/project/view/<%= project._id %>"
+                    class="text-blue-500 hover:text-blue-700 text-sm font-medium flex items-center">
+                    <i class="ri-eye-line mr-1 text-blue-500"></i> View
+                </a>
+                <a href="/project/edit/<%= project._id %>"
+                    class="text-yellow-500 hover:text-yellow-700 text-sm font-medium flex items-center">
+                    <i class="ri-edit-line mr-1 text-yellow-500"></i> Edit
+                </a>
+                <form action="/project/delete/<%= project._id %>" method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this project?');">
+                    <button type="submit"
+                        class="text-red-500 hover:text-red-700 text-sm font-medium flex items-center">
+                        <i class="ri-delete-bin-line mr-1 text-red-500"></i> Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+    <% } else { %>
+    <p class="text-gray-600 text-sm">No projects available. Please upload a new project.</p>
+    <% } %>
+</section>
+
+
+
 
             <!-- Jobs Section -->
             <section class="w-full lg:w-1/2 jobs-section mt-6 lg:mt-0">
                 <div class="section-header">Your Jobs</div>
                 <% if (user.jobs.length > 0) { %>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 section-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 section-content">
                     <% user.jobs.forEach((job) => { %>
                     <div class="card">
                         <h3 class="title">
@@ -198,6 +191,124 @@
             </section>
         </div>
     </div>
+      <!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="container mx-auto px-6">
+
+        <!-- Company Info Section -->
+        <div class="mb-12">
+            <div class="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
+                <!-- Company Description -->
+                <div class="w-full md:w-1/3">
+                    <h5 class="text-3xl font-bold mb-4 text-white">ExpertLancer</h5>
+                    <p class="mb-4 text-gray-400 leading-relaxed">
+                        ExpertLancer connects top-tier freelancers with innovative companies. Our platform offers a
+                        seamless experience to find and manage freelance projects, enhancing productivity and
+                        creating opportunities for talent worldwide.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Facebook">
+                            <i class="ri-facebook-line text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Twitter">
+                            <i class="ri-twitter-line text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="LinkedIn">
+                            <i class="ri-linkedin-line text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Instagram">
+                            <i class="ri-instagram-line text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Contact Information -->
+                <div class="w-full md:w-1/3">
+                    <h5 class="text-lg font-semibold mb-4 text-white">Contact Us</h5>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400">
+                            <i class="ri-mail-line mr-2"></i>
+                            <a href="mailto:info@expertlancer.com" class="hover:text-white">info@expertlancer.com</a>
+                        </li>
+                        <li class="text-gray-400">
+                            <i class="ri-phone-line mr-2"></i>
+                            <a href="tel:+123456789" class="hover:text-white">+1 (234) 567-89</a>
+                        </li>
+                        <li class="text-gray-400">
+                            <i class="ri-map-pin-line mr-2"></i>
+                            123 Suite 456, City, Country
+                        </li>
+                    </ul>
+                </div>
+                <!-- Newsletter Signup -->
+                <div class="w-full md:w-1/3">
+                    <h5 class="text-lg font-semibold mb-4 text-white">Stay Updated</h5>
+                    <p class="mb-4 text-gray-400">Subscribe to our newsletter for the latest updates, job
+                        opportunities, and tips on maximizing your freelance career.</p>
+                    <form action="#" method="post" class="flex flex-col space-y-4">
+                        <input type="email" placeholder="Enter your email"
+                            class="p-3 rounded-md border border-gray-700 bg-gray-800 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                        <button type="submit"
+                            class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition-colors duration-300">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Sections -->
+        <div class="flex flex-col md:flex-row justify-between mb-12">
+            <!-- Quick Links Section -->
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h5 class="text-lg font-semibold mb-4 text-white">Quick Links</h5>
+                <ul class="space-y-2">
+                    <li><a href="/" class="text-gray-400 hover:text-white">Home</a></li>
+                    <li><a href="/login-freelancer" class="text-gray-400 hover:text-white">Find Work</a></li>
+                    <li><a href="/login-user" class="text-gray-400 hover:text-white">Find Freelancers</a></li>
+                    <li><a href="/login-user" class="text-gray-400 hover:text-white">Log In</a></li>
+                    <li><a href="/register-user" class="text-gray-400 hover:text-white">Sign Up</a></li>
+                </ul>
+            </div>
+            <!-- Resources Section -->
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h5 class="text-lg font-semibold mb-4 text-white">Resources</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Community</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">API Documentation</a></li>
+                </ul>
+            </div>
+            <!-- Legal Section -->
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                <h5 class="text-lg font-semibold mb-4 text-white">Legal</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <!-- Features Section -->
+            <div class="w-full md:w-1/4">
+                <h5 class="text-lg font-semibold mb-4 text-white">Features</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Advanced Search</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Project Management</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Secure Payments</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">24/7 Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="text-center border-t border-gray-700 pt-6">
+            <p class="text-gray-500">&copy; 2024 ExpertLancer. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 </body>
 
 </html>

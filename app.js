@@ -32,37 +32,57 @@ app.use('/job', jobRoutes);
 app.use('/', freelancerRoutes);
 
 io.on('connection', async (socket) => {
-  try {
-      // Fetch the last 100 messages from the database and send them to the new user
-      const messages = await Message.find().sort({ timestamp: 1 }).limit(100).exec();
-      socket.emit('chatHistory', messages);
-  } catch (err) {
-      console.error('Error fetching chat history:', err);
-  }
+    try {
+        // Fetch and send chat history
+        const messages = await Message.find().sort({ timestamp: 1 }).limit(100).exec();
+        socket.emit('chatHistory', messages);
+    } catch (err) {
+        console.error('Error fetching chat history:', err);
+    }
 
-  // Handle new messages
-  socket.on('newmessage', async (data) => {
-      try {
-          // Save the message to the database
-          const message = new Message({
-              username: data.username,
-              text: data.text,
-          });
+    // Handle new text messages
+    socket.on('newmessage', async (data) => {
+        try {
+            const message = new Message({
+                username: data.username,
+                text: data.text,
+            });
+            await message.save();
+            io.emit('message', data);
+        } catch (err) {
+            console.error('Error saving message:', err);
+        }
+    });
 
-          await message.save(); // Use await to save the message
+    // Handle file messages
+    socket.on('sendfile', async (data) => {
+        try {
+            const message = new Message({
+                username: data.username,
+                fileName: data.fileName,
+                fileData: Buffer.from(data.fileData, 'base64'),  // Store the file data as base64 in the database
+                fileType: data.fileType   // Optionally store the file type (e.g., image/png, application/pdf)
+            });
+            await message.save();
 
-          // Broadcast the message to everyone (including the sender)
-          io.emit('message', data);
-      } catch (err) {
-          console.error('Error saving message:', err);
-      }
-  });
+            // Send file metadata to all connected clients (without base64 data)
+            io.emit('message', {
+                username: data.username,
+                fileName: data.fileName,
+                fileType: data.fileType,  // Send file metadata
+                fileData: data.fileData   // Base64 data for client-side rendering
+            });
+        } catch (err) {
+            console.error('Error saving file:', err);
+        }
+    });
 
-  // Handle disconnection
-  socket.on('disconnect', () => {
-     
-  });
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
 });
+
+  
 
 
 const PORT = process.env.PORT || 3000;

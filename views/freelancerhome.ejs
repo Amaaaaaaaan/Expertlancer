@@ -10,23 +10,30 @@
 
     <style>
         body::-webkit-scrollbar {
-    width: 10px; /* Slightly wider for a more prominent look */
-}
+            width: 10px;
+            /* Slightly wider for a more prominent look */
+        }
 
-body::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #7e7e7e, #3e3e3e); /* Professional blue gradient */
-    border-radius: 8px; /* Slightly rounded corners */
-    border: 2px solid #f8f9fa; /* Light border to stand out */
-}
+        body::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #7e7e7e, #3e3e3e);
+            /* Professional blue gradient */
+            border-radius: 8px;
+            /* Slightly rounded corners */
+            border: 2px solid #f8f9fa;
+            /* Light border to stand out */
+        }
 
-body::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #0056b3, #003d80); /* Darker blue on hover */
-}
+        body::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #0056b3, #003d80);
+            /* Darker blue on hover */
+        }
 
-body::-webkit-scrollbar-track {
-    background: #f1f3f5; /* Light gray track background for a clean look */
-    border-radius: 8px;
-}
+        body::-webkit-scrollbar-track {
+            background: #f1f3f5;
+            /* Light gray track background for a clean look */
+            border-radius: 8px;
+        }
+
         #messages::-webkit-scrollbar {
             width: 8px;
         }
@@ -75,125 +82,128 @@ body::-webkit-scrollbar-track {
 
         /* Container for messages */
         #messages {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    overflow-y: auto;
-    max-height: 400px;
-}
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
 
-.message {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 75%;
-    word-wrap: break-word;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    animation: slideIn 0.3s ease-out; /* Add slide-in animation */
-}
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 75%;
+            word-wrap: break-word;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.3s ease-out;
+            /* Add slide-in animation */
+        }
 
-.message.incoming {
-    background-color: #f1f1f1;
-    align-self: flex-start;
-    border-radius: 8px 8px 8px 0;
-}
+        .message.incoming {
+            background-color: #f1f1f1;
+            align-self: flex-start;
+            border-radius: 8px 8px 8px 0;
+        }
 
-.message.outgoing {
-    background-color: #007bff;
-    color: #ffffff;
-    align-self: flex-end;
-    border-radius: 8px 8px 0 8px;
-}
+        .message.outgoing {
+            background-color: #007bff;
+            color: #ffffff;
+            align-self: flex-end;
+            border-radius: 8px 8px 0 8px;
+        }
 
-.message .content {
-    display: flex;
-    align-items: center;
-}
+        .message .content {
+            display: flex;
+            align-items: center;
+        }
 
-.message .content p {
-    margin: 0;
-    line-height: 1.4;
-    white-space: pre-wrap;
-}
+        .message .content p {
+            margin: 0;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
 
-.message .username {
-    margin-right: 10px; /* Space between username and message */
-    font-weight: bold;
-    font-size: 0.9em;
-    color: #555; /* Gray color for username */
-}
+        .message .username {
+            margin-right: 10px;
+            /* Space between username and message */
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #555;
+            /* Gray color for username */
+        }
 
-.message.outgoing .username {
-    color: #ffffff; /* White color for outgoing username */
-}
+        .message.outgoing .username {
+            color: #ffffff;
+            /* White color for outgoing username */
+        }
 
-.message p {
-    margin: 0;
-    line-height: 1.4;
-    white-space: pre-wrap;
-}
+        .message p {
+            margin: 0;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
 
-.chat-image {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-top: 5px;
-}
+        .chat-image {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
 
-@media (max-width: 600px) {
-    .message {
-        max-width: 90%;
-        padding: 8px;
-    }
-}
+        @media (max-width: 600px) {
+            .message {
+                max-width: 90%;
+                padding: 8px;
+            }
+        }
 
-.message:not(:last-child) {
-    margin-bottom: 12px;
-}
+        .message:not(:last-child) {
+            margin-bottom: 12px;
+        }
 
-#message {
-    width: calc(100% - 80px);
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-}
+        #message {
+            width: calc(100% - 80px);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
 
-#sendButton {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(45deg, #007bff, #0056b3);
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s;
-}
+        #sendButton {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
 
-#sendButton:hover {
-    background: linear-gradient(45deg, #0056b3, #007bff);
-}
+        #sendButton:hover {
+            background: linear-gradient(45deg, #0056b3, #007bff);
+        }
 
-/* Slide-in animation for new messages */
-@keyframes slideIn {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
+        /* Slide-in animation for new messages */
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
 
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     </style>
 
 </head>
 
 <body class="bg-gray-100 text-gray-900">
 
-    <!-- Header -->
     <header class="bg-white p-4 md:p-5 flex justify-between items-center shadow-md">
         <div class="flex justify-between items-center w-full md:w-auto">
             <a class="text-2xl font-bold mr-40 text-blue-600 whitespace-nowrap" href="/freelancerhome">ExpertLancer</a>
@@ -204,22 +214,56 @@ body::-webkit-scrollbar-track {
         <nav class="hidden md:flex flex-1 mr-44 justify-center">
             <ul id="menu"
                 class="hidden md:flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 text-lg font-medium">
-                <li><a href="#" class="text-blue-600 hover:text-blue-800 flex items-center"><i
+                <li><a href="/freelancerhome" class="text-blue-600 hover:text-blue-800 flex items-center"><i
                             class="ri-home-line text-xl mr-2"></i>Home</a></li>
                 <li><a href="/projectdisplay" class="hover:text-blue-600 flex items-center"><i
                             class="ri-user-search-line text-xl mr-2"></i>Find Work</a></li>
-                <li><a href="/jobdisplay" class="hover:text-blue-600 flex items-center"><i
+                <li><a href="/jobdisplay" class="hover:text-blue-600 mr-28 flex items-center"><i
                             class="ri-user-search-line text-xl mr-2"></i>Find Job</a></li>
-                <li><a href="/freelancer-profile" class="hover:text-blue-600 flex items-center"><i
-                            class="ri-user-line text-xl mr-2"></i>Profile</a></li>
+
             </ul>
         </nav>
-        <div class="hidden md:flex items-center space-x-4">
+<!-- Profile dropdown with freelancer image -->
+<div class="hidden md:flex items-center relative">
+    <button id="profile-toggle"
+        class="flex items-center space-x-2 text-gray-600 hover:text-blue-600 focus:outline-none">
+        <!-- Display freelancer image -->
+        <img src="<%= freelancer.image %>" alt="Profile" class="w-10 h-10 rounded-full">
+    </button>
+    <!-- Dropdown Menu -->
+    <div id="profile-menu" class="hidden mt-80 absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2">
+        <a href="/freelancer-profile" class="block px-4 py-2 text-gray-600 hover:bg-blue-100 hover:text-blue-600">My Profile</a>
+        <a href="/edit-profile" class="block px-4 py-2 text-gray-600 hover:bg-blue-100 hover:text-blue-600">Settings</a>
+        <a href="/get-insurance" class="block px-4 py-2 text-gray-600 hover:bg-blue-100 hover:text-blue-600">Get Insurance</a>
+        <a href="/skillgap" class="block px-4 py-2 text-gray-600 hover:bg-blue-100 hover:text-blue-600">Skill Gap Analysis</a>
+        <a href="/assigned-projects" class="block px-4 py-2 text-gray-600 hover:bg-blue-100 hover:text-blue-600">Assigned Projects</a>
+        <a href="/assigned-projects" class="block px-4 py-2 text-gray-600 hover:bg-blue-100 hover:text-blue-600">Legal Advice</a>
+        <a href="/logout" class="block px-4 py-2 text-red-600 hover:bg-red-100">Logout</a>
+    </div>
+</div>
 
-            <a href="/logout" class="text-red-600 hover:text-red-800 text-xl md:text-2xl flex items-center"><i
-                    class="ri-logout-box-line"></i>Logout</a>
-        </div>
     </header>
+
+
+    <script>
+        // Toggle profile dropdown menu visibility
+        document.getElementById('profile-toggle').addEventListener('click', function () {
+            const menu = document.getElementById('profile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function (e) {
+            const profileMenu = document.getElementById('profile-menu');
+            const profileToggle = document.getElementById('profile-toggle');
+
+            if (!profileToggle.contains(e.target) && !profileMenu.contains(e.target)) {
+                profileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+
+
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden bg-white shadow-md md:hidden">
@@ -230,8 +274,11 @@ body::-webkit-scrollbar-track {
                         class="ri-briefcase-line text-xl mr-2"></i>Find work</a></li>
             <li><a href="/jobdisplay" class="hover:text-blue-600 flex items-center"><i
                         class="ri-briefcase-line text-xl mr-2"></i>Find job</a></li>
-            <li><a href="#" class="hover:text-blue-600 flex items-center"><i
-                        class="ri-user-line text-xl mr-2"></i>Profile</a></li>
+            <li><a href="/freelancer-profile" class="hover:text-blue-600 flex items-center"><i
+                        class="ri-user-line text-xl mr-2"></i>My Profile</a></li>
+
+            <li> <a href="/edit-profile" class="block px-4 py-2 text-gray-600 hover:bg-blue-100 hover:text-blue-600">
+                    <i class="ri-edit-line text-xl mr-2"></i>Settings</a></li>
             <li><a href="/logout" class="text-red-600 hover:text-red-800 flex items-center"><i
                         class="ri-logout-box-line text-xl mr-2"></i>Logout</a></li>
         </ul>
@@ -272,104 +319,122 @@ body::-webkit-scrollbar-track {
     </section>
 
     <!-- Chat Popup Container -->
-    <div id="chatPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="relative bg-white border border-gray-200 shadow-lg rounded-lg p-6 max-w-2xl w-full">
-            <!-- Close Button -->
-            <button id="closeChat" class="absolute top-0  right-1 text-red-500 hover:text-red-800 text-2xl font-bold">
-                &times;
-            </button>
+<div id="chatPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 hidden">
+    <div class="relative bg-white rounded-xl shadow-2xl w-full max-w-3xl h-5/6"> <!-- Expanded width and height -->
+        <!-- Close Button -->
+        <button id="closeChat" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold focus:outline-none">
+            &times;
+        </button>
 
-            <!-- Chat Header -->
-            <div class="text-center mb-6">
-                <h2
-                    class="text-3xl font-bold text-white bg-gradient-to-r from-blue-600 to-blue-400 py-3 rounded-lg shadow-sm">
-                    Freelancers Community Chat
-                </h2>
-                <p class="text-sm text-gray-600 mt-2">Connect and collaborate with other freelancers in real-time.</p>
+        <!-- Chat Header -->
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h2 class="text-lg font-semibold text-gray-900 text-center">Freelancers Community Chat</h2>
+            <p class="text-xs text-gray-500 text-center">Connect and collaborate with other freelancers in real-time.</p>
+        </div>
+
+        <!-- Chat Content -->
+        <div class="px-6 py-4 h-[70vh] flex flex-col"> <!-- Increased the height for more chat space -->
+            <div id="messages" class="bg-gray-50 border border-gray-200 rounded-lg flex-grow p-4 overflow-y-auto">
+                <!-- Messages will be dynamically inserted here -->
             </div>
+            <div class="mt-4 flex items-center space-x-2"> <!-- Added some spacing between elements -->
+                
+                <!-- Attach File Button -->
+                <label for="fileInput" class="bg-gray-200 text-gray-600 rounded-full w-12 h-12 flex items-center justify-center cursor-pointer hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 15v2a5 5 0 01-5 5h-6a5 5 0 01-5-5v-6a5 5 0 015-5h6a5 5 0 015 5v8a3 3 0 01-3 3 3 3 0 01-3-3V10" />
+                    </svg>
+                </label>
+                <input type="file" id="fileInput" class="hidden"> <!-- Hidden input to trigger file selection -->
 
-            <!-- Chat Content -->
-            <div class="flex flex-col h-80">
-                <div id="messages"
-                    class="bg-gray-100 border border-gray-300 rounded-lg shadow-inner p-4 flex-grow overflow-y-auto">
-                    <!-- Messages will be dynamically inserted here -->
+                <!-- Message Input -->
+                <input type="text" id="message" placeholder="Type a message..." 
+                       class="flex-grow h-12 bg-gray-100 border border-gray-300 rounded-full px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                
+                <!-- Send Button -->
+                <button id="sendButton" class="ml-2 bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg">
+                    <h3>Send</h3> <!-- Replace the SVG with a 'Send' label -->
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <!-- Highlighted Projects Section -->
+    <section class="py-10 bg-white text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-blue-600 mb-8">Highlighted Projects</h2>
+            <p class="text-lg text-gray-600 mb-12">
+                We have selected some projects according to your skills
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800">Interactive Recipe Adjuster</h3>
+                    <p class="text-gray-500 mb-4">"A dynamic web application that allows users to adjust recipes based
+                        on ingredient availability and serving size, with real-time updates."</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 font-bold">View Details</a>
                 </div>
-                <div class="flex items-center mt-4">
-                    <input type="text" id="message" placeholder="Type your message..."
-                        class="flex-grow h-12 p-3 border border-gray-300 rounded-lg mr-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <button id="sendButton"
-                        class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500">Send</button>
+
+                <!-- Project 2 -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800">Live Chat App</h3>
+                    <p class="text-gray-500 mb-4">"A real-time chat application built using Node.js, Socket.io, and
+                        MongoDB, featuring multiple chat rooms and private messaging."</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 font-bold">View Details</a>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800">Freelancer Dashboard</h3>
+                    <p class="text-gray-500 mb-4">"A comprehensive dashboard for freelancers to manage their projects,
+                        track earnings, and apply for new jobs seamlessly."</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 font-bold">View Details</a>
                 </div>
             </div>
         </div>
-    </div>
-
-<!-- Highlighted Projects Section -->
-<section class="py-10 bg-white text-center">
-    <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-blue-600 mb-8">Highlighted Projects</h2>
-        <p class="text-lg text-gray-600 mb-12">
-            We have selected some projects according to your skills
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Project 1 -->
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <h3 class="text-xl font-bold text-gray-800">Interactive Recipe Adjuster</h3>
-                <p class="text-gray-500 mb-4">"A dynamic web application that allows users to adjust recipes based on ingredient availability and serving size, with real-time updates."</p>
-                <a href="#" class="text-blue-600 hover:text-blue-800 font-bold">View Details</a>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <h3 class="text-xl font-bold text-gray-800">Live Chat App</h3>
-                <p class="text-gray-500 mb-4">"A real-time chat application built using Node.js, Socket.io, and MongoDB, featuring multiple chat rooms and private messaging."</p>
-                <a href="#" class="text-blue-600 hover:text-blue-800 font-bold">View Details</a>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <h3 class="text-xl font-bold text-gray-800">Freelancer Dashboard</h3>
-                <p class="text-gray-500 mb-4">"A comprehensive dashboard for freelancers to manage their projects, track earnings, and apply for new jobs seamlessly."</p>
-                <a href="#" class="text-blue-600 hover:text-blue-800 font-bold">View Details</a>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
 
-<!-- Jobs According to Your Interest Section -->
-<section class="py-10 bg-white text-center">
-    <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-blue-600 mb-8">Jobs According to Your Interests</h2>
-        <p class="text-lg text-gray-600 mb-12">
-            Explore job opportunities that match your skills and interests.
-        </p>
+    <!-- Jobs According to Your Interest Section -->
+    <section class="py-10 bg-white text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-blue-600 mb-8">Jobs According to Your Interests</h2>
+            <p class="text-lg text-gray-600 mb-12">
+                Explore job opportunities that match your skills and interests.
+            </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Job 1 -->
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <h3 class="text-xl font-bold text-gray-800">Frontend Developer</h3>
-                <p class="text-gray-500 mb-4">"Looking for a skilled frontend developer proficient in React and Tailwind CSS to work on a dynamic web application..."</p>
-                <a href="/job/1" class="text-blue-600 hover:text-blue-800 font-bold">View Job</a>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Job 1 -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800">Frontend Developer</h3>
+                    <p class="text-gray-500 mb-4">"Looking for a skilled frontend developer proficient in React and
+                        Tailwind CSS to work on a dynamic web application..."</p>
+                    <a href="/job/1" class="text-blue-600 hover:text-blue-800 font-bold">View Job</a>
+                </div>
 
-            <!-- Job 2 -->
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <h3 class="text-xl font-bold text-gray-800">Backend Developer</h3>
-                <p class="text-gray-500 mb-4">"Seeking an experienced backend developer with knowledge in Node.js, Express, and MongoDB for a scalable project..."</p>
-                <a href="/job/2" class="text-blue-600 hover:text-blue-800 font-bold">View Job</a>
-            </div>
+                <!-- Job 2 -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800">Backend Developer</h3>
+                    <p class="text-gray-500 mb-4">"Seeking an experienced backend developer with knowledge in Node.js,
+                        Express, and MongoDB for a scalable project..."</p>
+                    <a href="/job/2" class="text-blue-600 hover:text-blue-800 font-bold">View Job</a>
+                </div>
 
-            <!-- Job 3 -->
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <h3 class="text-xl font-bold text-gray-800">UI/UX Designer</h3>
-                <p class="text-gray-500 mb-4">"Hiring a creative UI/UX designer to design user-friendly interfaces for a mobile application in the e-commerce sector..."</p>
-                <a href="/job/3" class="text-blue-600 hover:text-blue-800 font-bold">View Job</a>
+                <!-- Job 3 -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-800">UI/UX Designer</h3>
+                    <p class="text-gray-500 mb-4">"Hiring a creative UI/UX designer to design user-friendly interfaces
+                        for a mobile application in the e-commerce sector..."</p>
+                    <a href="/job/3" class="text-blue-600 hover:text-blue-800 font-bold">View Job</a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 
@@ -384,28 +449,34 @@ body::-webkit-scrollbar-track {
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
                 <!-- Company Description -->
-                <div class="w-full md:w-1/4">
+                <div class="w-full md:w-1/3">
                     <h5 class="text-3xl font-bold mb-4 text-white">ExpertLancer</h5>
                     <p class="mb-4 text-gray-400 leading-relaxed">
-                        ExpertLancer connects top-tier freelancers with innovative companies. Our platform offers a seamless experience to find and manage freelance projects, enhancing productivity and creating opportunities for talent worldwide.
+                        ExpertLancer connects top-tier freelancers with innovative companies. Our platform offers a
+                        seamless experience to find and manage freelance projects, enhancing productivity and
+                        creating opportunities for talent worldwide.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Facebook">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Facebook">
                             <i class="ri-facebook-line text-2xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Twitter">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Twitter">
                             <i class="ri-twitter-line text-2xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="LinkedIn">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="LinkedIn">
                             <i class="ri-linkedin-line text-2xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Instagram">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"
+                            aria-label="Instagram">
                             <i class="ri-instagram-line text-2xl"></i>
                         </a>
                     </div>
                 </div>
                 <!-- Contact Information -->
-                <div class="w-full ml-40 md:w-1/3">
+                <div class="w-full md:w-1/3">
                     <h5 class="text-lg font-semibold mb-4 text-white">Contact Us</h5>
                     <ul class="space-y-2">
                         <li class="text-gray-400">
@@ -418,17 +489,21 @@ body::-webkit-scrollbar-track {
                         </li>
                         <li class="text-gray-400">
                             <i class="ri-map-pin-line mr-2"></i>
-                            123 Freelancer Ave, Suite 456, City, Country
+                            123 Suite 456, City, Country
                         </li>
                     </ul>
                 </div>
                 <!-- Newsletter Signup -->
                 <div class="w-full md:w-1/3">
                     <h5 class="text-lg font-semibold mb-4 text-white">Stay Updated</h5>
-                    <p class="mb-4 text-gray-400">Subscribe to our newsletter for the latest updates, job opportunities, and tips on maximizing your freelance career.</p>
+                    <p class="mb-4 text-gray-400">Subscribe to our newsletter for the latest updates, job
+                        opportunities, and tips on maximizing your freelance career.</p>
                     <form action="#" method="post" class="flex flex-col space-y-4">
-                        <input type="email" placeholder="Enter your email" class="p-3 rounded-md border border-gray-700 bg-gray-800 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition-colors duration-300">Subscribe</button>
+                        <input type="email" placeholder="Enter your email"
+                            class="p-3 rounded-md border border-gray-700 bg-gray-800 text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                        <button type="submit"
+                            class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition-colors duration-300">Subscribe</button>
                     </form>
                 </div>
             </div>
@@ -441,8 +516,8 @@ body::-webkit-scrollbar-track {
                 <h5 class="text-lg font-semibold mb-4 text-white">Quick Links</h5>
                 <ul class="space-y-2">
                     <li><a href="/" class="text-gray-400 hover:text-white">Home</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white">Find Work</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white">Find Freelancers</a></li>
+                    <li><a href="/login-freelancer" class="text-gray-400 hover:text-white">Find Work</a></li>
+                    <li><a href="/login-user" class="text-gray-400 hover:text-white">Find Freelancers</a></li>
                     <li><a href="/login-user" class="text-gray-400 hover:text-white">Log In</a></li>
                     <li><a href="/register-user" class="text-gray-400 hover:text-white">Sign Up</a></li>
                 </ul>
@@ -458,7 +533,7 @@ body::-webkit-scrollbar-track {
                 </ul>
             </div>
             <!-- Legal Section -->
-            <div class="w-full md:w-1/4">
+            <div class="w-full md:w-1/4 mb-6 md:mb-0">
                 <h5 class="text-lg font-semibold mb-4 text-white">Legal</h5>
                 <ul class="space-y-2">
                     <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
@@ -484,6 +559,7 @@ body::-webkit-scrollbar-track {
         </div>
     </div>
 </footer>
+
 
     <script
         type="text/javascript">window.$crisp = []; window.CRISP_WEBSITE_ID = "2d25c9a8-52e4-47ec-a2bc-0375cb39fb1e"; (function () { d = document; s = d.createElement("script"); s.src = "https://client.crisp.chat/l.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })();</script>
@@ -521,62 +597,97 @@ body::-webkit-scrollbar-track {
 
     <script>
         // Assuming 'freelancer' is an object with a 'username' property
-        const username = '<%= freelancer.username %>';
+        const username = '<%= freelancer.name %>';
     </script>
 
 
     <script src="/socket.io/socket.io.js"></script>
-    <script>const socket = io();
+    <script>
+        // Function to scroll chat to the bottom
+        function scrollToBottom() {
+            allmessages.scrollTop = allmessages.scrollHeight;
+        }
+    
+        const socket = io();
         const sendbtn = document.getElementById('sendButton');
         const messageInput = document.getElementById('message');
         const allmessages = document.getElementById('messages');
-
+        const fileInput = document.getElementById('fileInput');
+        
+        // Observe mutations to detect changes (new messages added)
+        const observer = new MutationObserver(scrollToBottom);
+        observer.observe(allmessages, {
+            childList: true,
+        });
+    
         // Handle incoming chat history
         socket.on('chatHistory', (messages) => {
+            allmessages.innerHTML = ""; // Clear the chat area
             messages.forEach(data => {
-                const p = document.createElement("div");
-                p.classList.add("message", data.username === username ? "outgoing" : "incoming");
-                p.innerHTML = `
-          <span class="username">${data.username}:</span>
-          <p>${data.text}</p>
-        `;
-                allmessages.appendChild(p);
+                displayMessage(data);
             });
-            allmessages.scrollTop = allmessages.scrollHeight; // Scroll to the bottom
+            scrollToBottom();
         });
-
+    
         // Handle incoming messages
         socket.on('message', (data) => {
-            const p = document.createElement("div");
-            p.classList.add("message", data.username === username ? "outgoing" : "incoming");
-            p.innerHTML = `
-        <span class="username">${data.username}:</span>
-        <p>${data.text}</p>
-      `;
-            allmessages.appendChild(p);
-            allmessages.scrollTop = allmessages.scrollHeight; // Scroll to the bottom
+            displayMessage(data);
         });
-
-        // Send a new message
+    
+        // Send a new text message
         sendbtn.addEventListener("click", () => {
             const message = messageInput.value.trim();
             if (message) {
-                // Emit the message with the actual username included
                 socket.emit('newmessage', { text: message, username: username });
                 messageInput.value = ""; // Clear input field
             }
         });
-
+    
         // Send message on Enter key press
         messageInput.addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
                 sendbtn.click();
             }
         });
+    
+        // Send a file
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Data = e.target.result.split(',')[1]; // Get only the base64 part
+                    const fileType = file.type;  // Capture the file type
+                    socket.emit('sendfile', { username: username, fileName: file.name, fileData: base64Data, fileType: fileType });
+                };
+                reader.readAsDataURL(file); // Convert file to base64 string
+            }
+        });
+    
+        // Function to display messages in the chat area
+        function displayMessage(data) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message", data.username === username ? "outgoing" : "incoming");
+    
+            if (data.text) {
+                messageElement.innerHTML = `
+                    <span class="username">${data.username}:</span>
+                    <p>${data.text}</p>
+                `;
+            } else if (data.fileName) {
+                // Handling file messages, render a link to download or view the file
+                const fileUrl = `data:${data.fileType};base64,${data.fileData}`;
+                messageElement.innerHTML = `
+                    <span class="username">${data.username}:</span>
+                    <p><a href="${fileUrl}" download="${data.fileName}">Download ${data.fileName}</a></p>
+                `;
+            }
+    
+            allmessages.appendChild(messageElement);
+            scrollToBottom(); // Automatically scroll down when a new message is added
+        }
     </script>
-
-
-
+    
 </body>
 
 </html>

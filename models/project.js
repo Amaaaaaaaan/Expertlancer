@@ -30,6 +30,7 @@ const ProjectSchema = new Schema({
         enum: ['Web Development', 'Mobile Development', 'Data Science', 'Machine Learning', 'Others'], // Example categories
         default: 'Others' // Default category if none is provided
     },
+    assignedTo: { type: String, default: null }, // Store name as string
     created_at: {
         type: Date,
         default: Date.now

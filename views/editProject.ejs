@@ -11,20 +11,20 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h1 class="text-2xl font-bold mb-6 text-gray-800">Edit Project</h1>
-
+    
         <form action="/project/edit/<%= project._id %>" method="POST" enctype="multipart/form-data">
             <!-- Title Field -->
             <div class="mb-4">
                 <label for="title" class="block text-gray-700 text-sm font-semibold mb-2">Title</label>
                 <input type="text" id="title" name="title" value="<%= project.title %>" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
             </div>
-
+    
             <!-- Description Field -->
             <div class="mb-4">
                 <label for="description" class="block text-gray-700 text-sm font-semibold mb-2">Description</label>
                 <textarea id="description" name="description" rows="4" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600" required><%= project.description %></textarea>
             </div>
-
+    
             <!-- Category Field -->
             <div class="mb-4">
                 <label for="category" class="block text-gray-700 text-sm font-semibold mb-2">Category</label>
@@ -37,13 +37,25 @@
                     <option value="Others" <%= project.category === 'Others' ? 'selected' : '' %>>Others</option>
                 </select>
             </div>
+    
+<!-- Assigned To Field -->
+<div class="mb-4">
+    <label for="assignedTo" class="block text-gray-700 text-sm font-semibold mb-2">Assigned To</label>
+    <select id="assignedTo" name="assignedTo" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600">
+        <option value="" <%= !project.assignedTo ? 'selected' : '' %>>Unassigned</option>
+        <% freelancers.forEach((freelancer) => { %>
+            <option value="<%= freelancer.name %>" <%= project.assignedTo === freelancer.name ? 'selected' : '' %>><%= freelancer.name %></option>
+        <% }) %>
+    </select>
+</div>
 
+    
             <!-- PDF Upload Field (optional) -->
             <div class="mb-4">
                 <label for="pdf" class="block text-gray-700 text-sm font-semibold mb-2">Upload New PDF (if applicable)</label>
                 <input type="file" id="pdf" name="pdf" accept=".pdf" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600">
             </div>
-
+    
             <!-- Submit and Cancel Buttons -->
             <div class="flex justify-between items-center">
                 <button type="submit" class="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-600">
@@ -53,6 +65,10 @@
             </div>
         </form>
     </div>
+    
+
+   
+
 </body>
 
 </html>

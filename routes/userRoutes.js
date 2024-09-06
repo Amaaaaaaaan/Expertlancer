@@ -1,3 +1,5 @@
+// routes/userRoutes.js
+
 const express = require("express");
 const router = express.Router();
 const upload = require('../config/multer-config');
@@ -11,15 +13,17 @@ const {
     logoutController,
     userprofileController,
     uploadprojectController, 
-    homepageafterloginController
+    homepageafterloginController,
+    showfreelancerprofileController
 } = require("../controllers/userController");
 
 const { isloggedin, redirectifloggedin } = require("../middlewares/auth-middleware");
 
 // Route for homepage (without login functionality)
-router.get("/"  , homepageController);
+router.get("/", homepageController);
 
-router.get("/userhome", isloggedin,homepageafterloginController)
+// Route for user home after login
+router.get("/userhome", isloggedin, homepageafterloginController);
 
 // Route for user registration
 router.get("/register-user", registeruserpageController);
@@ -32,6 +36,9 @@ router.get("/logout", logoutController);
 
 // Route for user profile (after login)
 router.get("/user-profile", isloggedin, userprofileController);
+
+// Route for showing freelancer profiles
+router.get('/showfreelancerprofiles', isloggedin, showfreelancerprofileController);
 
 // Route for handling user registration submission
 router.post("/register-user", upload.single('image'), registeruserController);
