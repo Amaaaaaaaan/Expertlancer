@@ -1,7 +1,7 @@
     const Project = require('../models/project');
-    const User = require('../models/User');
+    const User = require('../models/user');
     const upload = require('../config/multer-config');
-    const userModel = require("../models/User");
+    const userModel = require("../models/user");
     const projectModel = require("../models/project");
     
     const Freelancer = require("../models/freelancer");
