@@ -1,5 +1,5 @@
 const Job = require('../models/job');
-const User = require('../models/User');
+const User = require('../models/user');
 
 // Render the upload job page
 module.exports.uploadJobPageController = async function (req, res) {
