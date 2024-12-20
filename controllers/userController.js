@@ -78,12 +78,12 @@ module.exports.loginuserController = async function (req, res) {
   try {
     let user = await userModel.findOne({ email }).select("+password");
     if (!user) {
-      return res.send("User not found");
+      return res.render("login-user", { error: "User not found" });
     }
 
     let result = await bcrypt.compare(password, user.password);
     if (!result) {
-      return res.send("Incorrect password");
+      return res.render("login-user", { error: "Incorrect password" });
     }
 
     let token = jwt.sign(
@@ -93,9 +93,8 @@ module.exports.loginuserController = async function (req, res) {
     res.cookie("token", token);
     res.redirect("/userhome");
   } catch (err) {
-    if (!res.headersSent) {
-      return res.status(500).send(err.message);
-    }
+    console.error(err);
+    return res.render("login-user", { error: "An error occurred during login. Please try again later." });
   }
 };
 
