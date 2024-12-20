@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const { Server } = require('socket.io');
 const mongoose = require('mongoose');  // Import mongoose
-const Message = require('./models/Message');  // Import the Message model
+const Message = require('./models/message');  // Import the Message model
 
 const app = express();
 const userRoutes = require('./routes/userRoutes');
