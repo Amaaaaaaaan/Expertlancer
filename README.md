@@ -1,3 +1,8 @@
+Here’s the corrected and cleanly formatted version of your README.md—now fixed with proper code block closures and consistent sections, ready to copy:
+
+---
+
+```markdown
 # 🌟 ExpertLancer – Revolutionizing Freelancing! 🌟
 
 **ExpertLancer** is a dynamic freelancing platform designed to connect clients with top freelancers across various industries. It offers a seamless experience for both freelancers and businesses, making it easy to find work, hire talent, and manage projects efficiently.
@@ -68,11 +73,20 @@ To run this project locally, create a `.env` file in the root directory and add 
 ```env
 MONGO_DB_URI=your_mongodb_connection_string
 JWT_KEY=your_jwt_secret_key
+```
+
+---
+
+## 📜 Scripts
 
 Install dependencies and start the project:
 
+```bash
 npm install
 node app.js
+```
+
+---
 
 ## 📬 Contact
 
@@ -80,4 +94,7 @@ node app.js
 - **Email:** [amantoma700@gmail.com](mailto:amantoma700@gmail.com)  
 - **LinkedIn:** [Aman Tomar](https://www.linkedin.com/in/aman-tomar-aaa554248/)  
 - **GitHub:** [Amaaaaaaaan](https://github.com/Amaaaaaaaan)
+```
+
+Let me know if you want this exported as a `.md` file too!
 
