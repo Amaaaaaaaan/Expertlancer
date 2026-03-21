@@ -3,9 +3,9 @@ Here’s the corrected and cleanly formatted version of your README.md—now fix
 ---
 
 ```markdown
-# 🌟 ExpertLancer – Revolutionizing Freelancing! 🌟
+# 🌟 TalentSync – Revolutionizing Freelancing! 🌟
 
-**ExpertLancer** is a dynamic freelancing platform designed to connect clients with top freelancers across various industries. It offers a seamless experience for both freelancers and businesses, making it easy to find work, hire talent, and manage projects efficiently.
+**TalentSync** is a dynamic freelancing platform designed to connect clients with top freelancers across various industries. It offers a seamless experience for both freelancers and businesses, making it easy to find work, hire talent, and manage projects efficiently.
 
 ---
 
